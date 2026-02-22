@@ -1,0 +1,596 @@
+Build a complete, fully functional static React website called "Ahirgarh" — a premium community wiki and heritage portal for the Ahir/Yadav community of India. This is a ONE-SHOT build — every single page, route, button, link, and interaction must work perfectly. No login, no signup, no backend, no database, no authentication whatsoever. Pure frontend React with all data hardcoded in /src/data/ files.
+
+---
+
+## ⚠️ CRITICAL RULES — READ FIRST:
+- Every navbar link must navigate to its correct route
+- Every "View →", "Read More →", "Explore →" button must navigate to the correct detail page
+- Every back button must work
+- Every filter/search must function
+- Every page must be reachable from the navbar
+- No broken links, no placeholder onClick={() => {}}, no TODO comments
+- All routes must be defined in App.jsx using React Router v6
+- Dark mode must work on every single component
+- Mobile hamburger menu must open/close and all links inside must work
+- CMD+K search modal must open, search must return results, clicking a result must navigate
+
+---
+
+## 🗂️ COMPLETE FILE STRUCTURE:
+src/
+├── App.jsx                          # All routes defined here
+├── main.jsx
+├── index.css                        # Global styles, scrollbar, fonts
+├── data/
+│   ├── articles.js                  # 6 wiki articles
+│   ├── gotras.js                    # 30 gotras
+│   ├── personalities.js             # 15 personalities
+│   ├── villages.js                  # 25 villages
+│   ├── timeline.js                  # 10 history events
+│   ├── matrimonials.js              # 12 dummy profiles
+│   ├── notices.js                   # 15 notice board posts
+│   └── translations.js             # EN + HI strings
+├── context/
+│   ├── ThemeContext.jsx             # dark/light mode
+│   └── LanguageContext.jsx         # EN/HI toggle
+├── components/
+│   ├── layout/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   └── SearchModal.jsx
+│   ├── ui/
+│   │   ├── Card.jsx
+│   │   ├── Badge.jsx
+│   │   ├── Button.jsx
+│   │   ├── SkeletonCard.jsx
+│   │   └── BackToTop.jsx
+│   └── home/
+│       ├── Hero.jsx
+│       ├── StatsBar.jsx
+│       ├── BentoGrid.jsx
+│       ├── FeaturedArticle.jsx
+│       └── AnnouncementTicker.jsx
+└── pages/
+├── HomePage.jsx
+├── wiki/
+│   ├── WikiPage.jsx             # All articles grid
+│   └── ArticlePage.jsx          # Single article (uses :slug param)
+├── gotras/
+│   ├── GotrasPage.jsx           # All gotras grid
+│   └── GotraDetailPage.jsx      # Single gotra (uses :id param)
+├── personalities/
+│   ├── PersonalitiesPage.jsx
+│   └── PersonalityDetailPage.jsx # uses :id param
+├── villages/
+│   ├── VillagesPage.jsx
+│   └── VillageDetailPage.jsx    # uses :id param
+├── HistoryPage.jsx
+├── CulturePage.jsx
+├── MatrimonialsPage.jsx
+├── NoticeBoardPage.jsx
+└── AboutPage.jsx
+
+---
+
+## 🔀 ALL ROUTES (define ALL of these in App.jsx):
+/                          → HomePage
+/wiki                      → WikiPage
+/wiki/:slug                → ArticlePage
+/gotras                    → GotrasPage
+/gotras/:id                → GotraDetailPage
+/personalities             → PersonalitiesPage
+/personalities/:id         → PersonalityDetailPage
+/villages                  → VillagesPage
+/villages/:id              → VillageDetailPage
+/history                   → HistoryPage
+/culture                   → CulturePage
+/matrimonials              → MatrimonialsPage
+/notice-board              → NoticeBoardPage
+/about                     → AboutPage
+
+Wrap all routes in a layout that includes Navbar and Footer. Use ScrollRestoration or useEffect to scroll to top on route change.
+
+---
+
+## 🎨 DESIGN SYSTEM:
+
+### Tailwind Config (extend in tailwind.config.js):
+```js
+colors: {
+  ahir: {
+    saffron: '#E8500A',
+    maroon: '#8B0000',
+    gold: '#C8963E',
+    cream: '#FFFBF5',
+    dark: '#0D0A07',
+    'dark-surface': '#1A1109',
+    'dark-elevated': '#241A0D',
+    'dark-border': '#2E1F0F',
+    'dark-gold': '#FFB830',
+    'dark-saffron': '#FF6B1A',
+  }
+}
+```
+
+### Light Mode Colors:
+- bg: #FFFBF5, cards: #FFFFFF, primary: #E8500A, secondary: #8B0000, gold: #C8963E, text: #1A0A00, muted: #6B5B4E, border: #F0E4D4
+
+### Dark Mode Colors:
+- bg: #0D0A07, cards: #1A1109, elevated: #241A0D, primary: #FF6B1A, secondary: #C0392B, gold: #FFB830, text: #F5ECD7, muted: #A89880, border: #2E1F0F
+
+### Dark Mode Implementation:
+- Use Tailwind class strategy: add/remove "dark" class on <html> element
+- ThemeContext.jsx: useState for theme, useEffect to apply class to document.documentElement and save to localStorage, read localStorage and prefers-color-scheme on init
+- Every component uses dark: variant classes
+
+### Typography:
+- Import in index.html via Google Fonts: Playfair Display (headings), Inter (body), Noto Sans Devanagari (Hindi)
+- Headings: font-playfair, gradient text: bg-gradient-to-r from-ahir-saffron to-ahir-gold bg-clip-text text-transparent
+- Body: font-inter
+
+### Global CSS (index.css):
+```css
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E8500A; border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb { background: #FF6B1A; }
+* { scroll-behavior: smooth; }
+```
+
+### Glassmorphism Card Class:
+```css
+.glass { backdrop-filter: blur(16px); background: rgba(255,255,255,0.08); border: 1px solid rgba(200,150,62,0.2); }
+.dark .glass { background: rgba(26,17,9,0.7); border: 1px solid rgba(255,184,48,0.15); }
+```
+
+---
+
+## 📦 HARDCODED DATA FILES:
+
+### /src/data/articles.js:
+```js
+export const articles = [
+  {
+    id: 1, slug: "who-are-ahirs",
+    title: "Who Are the Ahirs?",
+    titleHi: "अहीर कौन हैं?",
+    category: "Introduction",
+    excerpt: "The Ahirs, also known as Yadavs, are one of India's oldest and most distinguished communities with roots in the Yaduvanshi lineage.",
+    content: `The Ahir community, widely known as Yadavs, represents one of the most historically significant communities in the Indian subcontinent. The name "Ahir" is derived from the Sanskrit word "Abhira," found in ancient texts including the Mahabharata, Puranas, and various Vedic scriptures. The Abhiras were a powerful clan of pastoral warriors who herded cattle, fought wars, and ruled kingdoms across vast stretches of northern and western India. Their lineage traces directly to the Yaduvanshi dynasty — the clan of Lord Krishna himself, making them descendants of one of the most revered figures in all of Hindu tradition. Historically, the Ahirs were known not merely as farmers or cowherds but as a martial community. British colonial records specifically designated them as a "martial race," acknowledging their warrior tradition and physical prowess. The Ahirwal region of present-day Haryana — encompassing Rewari, Mahendragarh, and parts of Gurgaon — remains the traditional heartland of the Ahir community and is named after them. Today, the Yadav/Ahir community numbers over 100 million people across India, with strong concentrations in Uttar Pradesh, Bihar, Haryana, Rajasthan, Madhya Pradesh, and Maharashtra. They have produced national leaders, army generals, Bollywood stars, and Olympic athletes — a community that continues to shape India's political and cultural landscape.`,
+    readTime: "5 min", date: "2024-01-15", featured: true,
+    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800"
+  },
+  {
+    id: 2, slug: "lord-krishna-yaduvanshi",
+    title: "Lord Krishna & the Yaduvanshi Legacy",
+    titleHi: "भगवान कृष्ण और यादुवंशी विरासत",
+    category: "History",
+    excerpt: "Lord Krishna, the eighth avatar of Vishnu, was born into the Yaduvanshi clan — making him the most celebrated Ahir in all of history.",
+    content: `Lord Krishna, revered as the eighth avatar of Lord Vishnu, was born in Mathura to Devaki and Vasudeva — both members of the illustrious Yaduvanshi clan. This divine lineage connects the entire Ahir/Yadav community to one of the most celebrated figures in human history. Krishna spent his childhood in Vrindavan among the Gopas and Gopis — the pastoral Ahir community — herding cattle, playing the flute, and performing the Ras Lila. His childhood name "Gopal" (protector of cows) and "Govinda" (one who brings joy to the earth and cows) directly reference the pastoral Ahir way of life. The city of Mathura-Vrindavan, the holiest site for Yadav/Ahir heritage, is known as the birthplace of Krishna and remains a major pilgrimage site. The Bhagavad Gita, delivered by Krishna on the battlefield of Kurukshetra, is one of humanity's most profound philosophical texts. Scholars, historians, and community leaders widely acknowledge that the Ahir/Yadav community's identity is inseparable from the legacy of Lord Krishna. The Janmashtami festival, celebrating Krishna's birth, is one of the most important festivals for Ahir families across India.`,
+    readTime: "6 min", date: "2024-01-20", featured: true,
+    image: "https://images.unsplash.com/photo-1609154807254-d5d4f5ce3f82?w=800"
+  },
+  {
+    id: 3, slug: "ahir-kingdoms",
+    title: "Ahir Kingdoms & Rulers of Ancient India",
+    titleHi: "अहीर राज्य और प्राचीन भारत के शासक",
+    category: "History",
+    excerpt: "Long before the Mughal Empire, Ahir kings ruled vast territories across India. This is their story.",
+    content: `The historical record of Ahir kingdoms stretches across centuries and geographies, revealing a community that was far more than pastoral herders. The Ahirwal region of modern Haryana — meaning "homeland of the Ahirs" — was ruled by Ahir chieftains for centuries. The city of Rewari served as a key administrative and military center for Ahir rulers. One of the most remarkable Ahir military figures was Hemu, also known as Hem Chandra Vikramaditya, who rose from humble origins to become the Prime Minister and military general of Adil Shah Suri, eventually crowning himself Emperor of India in 1556 after capturing Delhi and Agra. He won 22 consecutive battles before his eventual defeat at the Second Battle of Panipat. In Maharashtra, the Ahir community produced significant rulers in the Deccan region. In Rajasthan and Gujarat, Ahir chieftains controlled important trade and military routes. Ancient texts including the Puranas and various regional histories reference Abhira kings ruling in Sindh, Punjab, and the western coast of India. The Yadava dynasty of the Deccan (Devagiri, modern Daulatabad) was a prominent medieval Indian kingdom that ruled Maharashtra from the 9th to 14th centuries and is often associated with the broader Yaduvanshi lineage.`,
+    readTime: "7 min", date: "2024-02-01", featured: false,
+    image: "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"
+  },
+  {
+    id: 4, slug: "yadav-political-rise",
+    title: "The Political Rise of Yadavs in Modern India",
+    titleHi: "आधुनिक भारत में यादवों का राजनीतिक उदय",
+    category: "Modern Era",
+    excerpt: "From village councils to the highest offices in the land — the Yadav community's political journey is one of India's greatest democratic stories.",
+    content: `The post-Independence political rise of the Yadav community is one of the most dramatic stories in Indian democratic history. For centuries marginalized by the caste hierarchy, the Yadav community leveraged the power of the ballot box to transform itself into one of India's most politically powerful groups. The Yadav Mahasabha, founded in 1924, was one of the earliest organized political movements of the community. The organization worked to unite various sub-communities — Ahirs, Goalas, Gwalas, Rawats — under the single identity of "Yadav." The socialist movement in north India, championed by Ram Manohar Lohia, gave Yadavs a powerful ideological framework demanding social justice and equality. Mulayam Singh Yadav, the founder of the Samajwadi Party, became Chief Minister of Uttar Pradesh and a Union Defence Minister — one of the most powerful political figures in north Indian politics for three decades. His son Akhilesh Yadav became Chief Minister of UP and continues to lead one of India's major political parties. In Bihar, Lalu Prasad Yadav served as Chief Minister and Railway Minister, building a massive political movement. The Mandal Commission recommendations of 1990 proved to be a watershed moment, bringing OBC reservations into national policy and further consolidating Yadav political power.`,
+    readTime: "8 min", date: "2024-02-10", featured: false,
+    image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800"
+  },
+  {
+    id: 5, slug: "ahir-culture-traditions",
+    title: "Culture, Traditions & Way of Life of the Ahir Community",
+    titleHi: "अहीर समाज की संस्कृति और परंपराएं",
+    category: "Culture",
+    excerpt: "From Rasiya folk music to Janmashtami celebrations — the rich cultural tapestry of the Ahir community across India.",
+    content: `The cultural life of the Ahir community is rich, diverse, and deeply intertwined with their pastoral heritage and devotion to Lord Krishna. Music forms the heart of Ahir culture. Rasiya, a traditional folk music genre of the Braj region (Mathura-Vrindavan area), is performed predominantly by Ahir communities and celebrates the love of Radha and Krishna. Ahiri folk songs are sung during festivals, marriages, and community gatherings across Haryana and UP. The Nautanki theatrical tradition, popular across north India, has deep roots in Ahir communities. Festivals hold enormous importance. Janmashtami (Krishna's birthday) is the most sacred festival for Ahir families, celebrated with fasting, all-night prayers, and dramatic performances of Krishna Leela. Holi, associated with Krishna's playfulness in Vrindavan, is celebrated with particular fervor. The Govardhan Puja following Diwali commemorates the legend of Krishna lifting Govardhan Hill. Traditional Ahir dress, particularly in Haryana and Rajasthan, features vibrant colors — women wear colorful ghaghra-choli with heavy silver jewelry, while men traditionally wore dhoti-kurta with distinctive turbans. The cattle-herding heritage remains part of Ahir identity — dairy farming, buffalo herding, and cattle care are traditional occupations that many families maintain alongside modern professions.`,
+    readTime: "6 min", date: "2024-02-15", featured: true,
+    image: "https://images.unsplash.com/photo-1583531352515-8884af319dc1?w=800"
+  },
+  {
+    id: 6, slug: "yadav-mahasabha",
+    title: "Yadav Mahasabha — The Unifying Force",
+    titleHi: "यादव महासभा — एकता की शक्ति",
+    category: "Organizations",
+    excerpt: "Founded in 1924, the Yadav Mahasabha has been the central organization uniting the diverse sub-communities under one Yadav identity.",
+    content: `The All India Yadav Mahasabha, founded in 1924 during the colonial era, stands as one of the oldest and most significant community organizations in India. Its founding was a direct response to the need to unite the scattered Ahir, Goala, Gwala, Rawat, and other sub-communities under a single, powerful Yadav identity. The founding of the Mahasabha was driven by a dual need: first, to counter the social discrimination faced by the community within the caste hierarchy; and second, to leverage political unity for better representation in colonial governance structures. The organization played a significant role in the Mandal Commission debates, advocating strongly for OBC reservations. Today, the All India Yadav Mahasabha has state chapters across every Indian state with significant Yadav populations. It organizes annual conventions, educational scholarships, community welfare programs, and matrimonial services. State-level bodies include the UP Yadav Mahasabha, Bihar Yadav Mahasabha, Haryana Ahir Mahasabha, and the Maharashtra Ahir Samaj. Beyond India, diaspora organizations in the United States, United Kingdom, Canada, and the Gulf countries serve the global Yadav community.`,
+    readTime: "5 min", date: "2024-02-20", featured: false,
+    image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800"
+  }
+];
+```
+
+### /src/data/gotras.js:
+```js
+export const gotras = [
+  { id: 1, name: "Kashyap", nameHi: "कश्यप", vansh: "Yaduvanshi", regions: ["UP", "Bihar", "Haryana"], description: "One of the oldest gotras, descended from the sage Kashyapa. Widely distributed across northern India." },
+  { id: 2, name: "Atri", nameHi: "अत्री", vansh: "Nandavanshi", regions: ["UP", "Rajasthan"], description: "Descended from Maharishi Atri, one of the Saptarishis. Known for their scholarly tradition." },
+  { id: 3, name: "Bharadwaj", nameHi: "भारद्वाज", vansh: "Krishnavanshi", regions: ["UP", "MP", "Maharashtra"], description: "Lineage of Rishi Bharadwaj, the great Vedic scholar and warrior-sage." },
+  { id: 4, name: "Gautam", nameHi: "गौतम", vansh: "Yaduvanshi", regions: ["Bihar", "UP"], description: "From the lineage of sage Gautama. Prominent in eastern UP and Bihar." },
+  { id: 5, name: "Vashishtha", nameHi: "वशिष्ठ", vansh: "Chandravanshi", regions: ["Haryana", "Rajasthan"], description: "One of the most revered gotras, tracing to Maharishi Vashishtha, royal priest of the Ikshvaku dynasty." },
+  { id: 6, name: "Sandilya", nameHi: "सांडिल्य", vansh: "Nandavanshi", regions: ["UP", "Bihar"], description: "Ancient gotra from Rishi Shandilya. Concentrated in the Bhojpuri belt." },
+  { id: 7, name: "Garg", nameHi: "गर्ग", vansh: "Yaduvanshi", regions: ["UP", "Haryana", "Rajasthan"], description: "Traced to sage Garga who performed the naming ceremony of Lord Krishna. Deeply connected to Yaduvanshi tradition." },
+  { id: 8, name: "Parashara", nameHi: "पाराशर", vansh: "Krishnavanshi", regions: ["UP", "Bihar"], description: "Descended from Maharishi Parashara, grandfather of the Pandavas through Vyasa." },
+  { id: 9, name: "Maudgalya", nameHi: "मौद्गल्य", vansh: "Yaduvanshi", regions: ["Maharashtra", "MP"], description: "From Rishi Mudgala. Prominent in Deccan Ahir communities." },
+  { id: 10, name: "Kaushik", nameHi: "कौशिक", vansh: "Nandavanshi", regions: ["UP", "Bihar", "Haryana"], description: "Lineage of Vishwamitra (born Kaushika). Warriors by tradition." },
+  { id: 11, name: "Vatsa", nameHi: "वत्स", vansh: "Chandravanshi", regions: ["UP", "Rajasthan"], description: "Ancient gotra found in the Gangetic plains. Associated with the Vatsa kingdom of ancient India." },
+  { id: 12, name: "Nandavanshi", nameHi: "नंदवंशी", vansh: "Nandavanshi", regions: ["UP", "Bihar", "Haryana"], description: "Direct lineage from Nanda, the foster father of Lord Krishna. Most sacred gotra for Ahir communities of Braj." },
+  { id: 13, name: "Aharwar", nameHi: "अहरवार", vansh: "Yaduvanshi", regions: ["Haryana", "Rajasthan"], description: "Native gotra of the Ahirwal region of Haryana. Warriors and pastoralists." },
+  { id: 14, name: "Rohilla", nameHi: "रोहिल्ला", vansh: "Yaduvanshi", regions: ["Haryana"], description: "Martial gotra from the Rewari-Mahendragarh belt of Haryana." },
+  { id: 15, name: "Sindhwal", nameHi: "सिंधवाल", vansh: "Chandravanshi", regions: ["Haryana", "Rajasthan"], description: "Historically linked to Sindh region. Prominent in western Haryana." },
+  { id: 16, name: "Dahiya", nameHi: "डाहिया", vansh: "Nandavanshi", regions: ["Haryana"], description: "Ancient clan of Haryana. Known for military service traditions." },
+  { id: 17, name: "Khanzad", nameHi: "खानजाद", vansh: "Yaduvanshi", regions: ["Bihar", "UP"], description: "Found predominantly in Bihar's Magadh region." },
+  { id: 18, name: "Palhwar", nameHi: "पलहवार", vansh: "Krishnavanshi", regions: ["Rajasthan", "MP"], description: "Rajasthan-based gotra with warrior traditions." },
+  { id: 19, name: "Bachhal", nameHi: "बछल", vansh: "Nandavanshi", regions: ["UP", "Bihar"], description: "Common gotra in eastern UP. Trace lineage to the Nandavanshi tradition." },
+  { id: 20, name: "Bhadauriya", nameHi: "भदौरिया", vansh: "Yaduvanshi", regions: ["UP", "MP"], description: "Historic clan of the Chambal and Gwalior regions." },
+  { id: 21, name: "Choudhary", nameHi: "चौधरी", vansh: "Yaduvanshi", regions: ["UP", "Bihar", "Rajasthan"], description: "A widely distributed gotra across the Gangetic belt." },
+  { id: 22, name: "Mangal", nameHi: "मंगल", vansh: "Chandravanshi", regions: ["Rajasthan"], description: "Found mainly in Rajasthan's Yadav communities." },
+  { id: 23, name: "Pachhad", nameHi: "पच्छाड", vansh: "Nandavanshi", regions: ["Haryana", "HP"], description: "Gotra of hill-region Ahirs of Himachal and Haryana." },
+  { id: 24, name: "Mor", nameHi: "मोर", vansh: "Yaduvanshi", regions: ["Haryana", "UP"], description: "Named after the peacock (mor), sacred to Krishna. Concentrated in Haryana." },
+  { id: 25, name: "Boken", nameHi: "बोकेन", vansh: "Krishnavanshi", regions: ["UP"], description: "Lesser-known gotra found in central UP districts." },
+  { id: 26, name: "Haritwal", nameHi: "हरितवाल", vansh: "Yaduvanshi", regions: ["UP", "Haryana"], description: "Gotra connected to the Harita sage lineage." },
+  { id: 27, name: "Rawat", nameHi: "रावत", vansh: "Chandravanshi", regions: ["Rajasthan", "MP", "Maharashtra"], description: "Sub-community name that also serves as a gotra identifier in western India." },
+  { id: 28, name: "Goala", nameHi: "गोआला", vansh: "Nandavanshi", regions: ["Bihar", "West Bengal"], description: "Bengal and Bihar Yadav sub-community with ancient pastoral roots." },
+  { id: 29, name: "Bhati", nameHi: "भाटी", vansh: "Yaduvanshi", regions: ["Rajasthan", "Haryana"], description: "Royal Rajput-connected Yaduvanshi gotra of the Thar desert region." },
+  { id: 30, name: "Jadaun", nameHi: "जादौन", vansh: "Yaduvanshi", regions: ["UP", "Rajasthan"], description: "Direct Yaduvanshi clan of Mathura and Karauli regions. Considered closest to the original Yadu lineage." }
+];
+```
+
+### /src/data/personalities.js:
+```js
+export const personalities = [
+  { id: 1, name: "Mulayam Singh Yadav", nameHi: "मुलायम सिंह यादव", category: "Politicians", gotra: "Yadav", state: "Uttar Pradesh", born: "1939", died: "2022", bio: "Three-time Chief Minister of Uttar Pradesh and founder of the Samajwadi Party. Known as 'Netaji', he was one of the most powerful political figures in north Indian politics for four decades. He also served as India's Defence Minister.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400", achievement: "Founded Samajwadi Party, 3x CM of UP" },
+  { id: 2, name: "Lalu Prasad Yadav", nameHi: "लालू प्रसाद यादव", category: "Politicians", gotra: "Yadav", state: "Bihar", born: "1948", died: null, bio: "Former Chief Minister of Bihar and Union Railway Minister. Known for his grassroots political mobilization of the OBC communities. Led Rashtriya Janata Dal for decades.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400", achievement: "CM of Bihar, Railway Minister of India" },
+  { id: 3, name: "Hemu (Hem Chandra Vikramaditya)", nameHi: "हेमू (हेम चन्द्र विक्रमादित्य)", category: "Military", gotra: "Yadav", state: "Haryana", born: "1501", died: "1556", bio: "Born in Rewari, Haryana, Hemu rose from being a grain merchant to becoming the Prime Minister and military chief of Adil Shah Suri. He won 22 consecutive battles, captured Delhi and Agra, and crowned himself Emperor Vikramaditya in 1556 — the last Hindu king to rule Delhi.", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400", achievement: "Last Hindu Emperor of Delhi, 22-0 military record" },
+  { id: 4, name: "Akhilesh Yadav", nameHi: "अखिलेश यादव", category: "Politicians", gotra: "Yadav", state: "Uttar Pradesh", born: "1973", died: null, bio: "Chief Minister of Uttar Pradesh (2012-2017) and current president of the Samajwadi Party. Known for infrastructure development including the Agra-Lucknow Expressway and Lucknow Metro.", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400", achievement: "CM of UP, SP President" },
+  { id: 5, name: "Sharad Yadav", nameHi: "शरद यादव", category: "Politicians", gotra: "Yadav", state: "Bihar", born: "1947", died: "2023", bio: "Veteran socialist leader and former president of Janata Dal (United). Served as Union Cabinet Minister and was one of the architects of the Mandal Commission implementation.", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400", achievement: "Union Cabinet Minister, Mandal Commission champion" },
+  { id: 6, name: "Yogendra Yadav", nameHi: "योगेंद्र यादव", category: "Politicians", gotra: "Yadav", state: "Haryana", born: "1963", died: null, bio: "Political scientist, psephologist, and activist. Co-founder of Swaraj India party. Known for his sharp analysis of Indian elections and advocacy for farmers and marginalized communities.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400", achievement: "Political Scientist, Swaraj India Co-founder" },
+  { id: 7, name: "Vijender Singh", nameHi: "विजेंदर सिंह", category: "Sports", gotra: "Beniwal", state: "Haryana", born: "1985", died: null, bio: "India's most celebrated boxer. Won Bronze medal at 2008 Beijing Olympics — India's first-ever Olympic boxing medal. Also won Gold at Commonwealth Games and Asian Games. From Kaluwas village, Bhiwani, Haryana.", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400", achievement: "Olympic Bronze Medalist, Boxing" },
+  { id: 8, name: "Deepika Kumari", nameHi: "दीपिका कुमारी", category: "Sports", gotra: "Yadav", state: "Jharkhand", born: "1994", died: null, bio: "World No. 1 ranked archer (multiple times). Won numerous World Cup gold medals and represented India at three Olympic Games. From Ratu, Jharkhand.", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400", achievement: "World No.1 Archer, Multiple World Cup Golds" },
+  { id: 9, name: "Ravi Kishan", nameHi: "रवि किशन", category: "Bollywood", gotra: "Yadav", state: "Uttar Pradesh", born: "1969", died: null, bio: "Bhojpuri and Hindi film actor, and Member of Parliament from Gorakhpur. One of the biggest stars in Bhojpuri cinema and known for his roles in Hindi films and reality shows.", image: "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=400", achievement: "Actor & MP, Bollywood and Bhojpuri Star" },
+  { id: 10, name: "Manoj Bajpayee", nameHi: "मनोज बाजपेयी", category: "Bollywood", gotra: "Yadav", state: "Bihar", born: "1969", died: null, bio: "National Award-winning actor, one of India's finest. Known for transformative roles in Satya, Gangs of Wasseypur, The Family Man. Born in West Champaran, Bihar.", image: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=400", achievement: "National Award Winner, The Family Man" },
+  { id: 11, name: "Devkinandan Thakur", nameHi: "देवकीनंदन ठाकुर", category: "Spiritual", gotra: "Yadav", state: "Uttar Pradesh", born: "1979", died: null, bio: "Beloved Hindu religious leader and Katha Vachak. Born in Mathura, he is one of the most popular spiritual personalities in north India, known for his Bhagwat Katha.", image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=400", achievement: "Renowned Bhagwat Katha Speaker" },
+  { id: 12, name: "General VK Singh", nameHi: "जनरल वीके सिंह", category: "Military", gotra: "Yadav", state: "Rajasthan", born: "1950", died: null, bio: "Former Chief of Army Staff of the Indian Army and Union Cabinet Minister. Served in multiple wars and counter-insurgency operations.", image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400", achievement: "Chief of Army Staff, Union Minister" },
+  { id: 13, name: "Phogat Sisters", nameHi: "फोगाट बहनें", category: "Sports", gotra: "Yadav", state: "Haryana", born: "1994", died: null, bio: "Geeta and Babita Phogat, from Balali village, Haryana, became India's first female wrestlers to compete at the Commonwealth Games and Olympics. Their story inspired the film Dangal.", image: "https://images.unsplash.com/photo-1542103749-8ef59b294f74?w=400", achievement: "Commonwealth Gold Medalists, Wrestling" },
+  { id: 14, name: "Sushil Kumar Shinde", nameHi: "सुशील कुमार शिंदे", category: "Politicians", gotra: "Yadav", state: "Maharashtra", born: "1941", died: null, bio: "Former Chief Minister of Maharashtra, Governor of Andhra Pradesh, and Union Home Minister. One of the most senior Congress leaders from the Yadav community.", image: "https://images.unsplash.com/photo-1580518324671-c2f0833a3af3?w=400", achievement: "CM Maharashtra, Union Home Minister" },
+  { id: 15, name: "Ram Manohar Lohia", nameHi: "राम मनोहर लोहिया", category: "Politicians", gotra: "Yadav", state: "Uttar Pradesh", born: "1910", died: "1967", bio: "Freedom fighter, philosopher, and socialist leader. His ideology of social justice and equality for OBC communities became the ideological foundation for the Yadav political movement in post-Independence India.", image: "https://images.unsplash.com/photo-1548449112-96a38a643324?w=400", achievement: "Father of Socialist Movement in India" }
+];
+```
+
+### /src/data/villages.js:
+```js
+export const villages = [
+  { id: 1, name: "Kaluwas", state: "Haryana", district: "Bhiwani", dominantGotra: "Beniwal", population: "~5,000", notablePeople: ["Vijender Singh (Olympic Boxer)"], history: "Famous as the hometown of Olympic boxer Vijender Singh. A predominantly Ahir village with strong military service tradition.", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" },
+  { id: 2, name: "Batham", state: "Uttar Pradesh", district: "Etawah", dominantGotra: "Yadav", population: "~8,000", notablePeople: ["Mulayam Singh Yadav"], history: "Home village of Mulayam Singh Yadav. A historic village in the Etawah district that has produced one of India's most powerful political leaders.", image: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600" },
+  { id: 3, name: "Gopalganj", state: "Bihar", district: "Gopalganj", dominantGotra: "Yadav", population: "~15,000", notablePeople: ["Lalu Prasad Yadav"], history: "Home district of Lalu Prasad Yadav. Strong Yadav political presence spanning decades.", image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=600" },
+  { id: 4, name: "Rewari", state: "Haryana", district: "Rewari", dominantGotra: "Ahirwal", population: "~100,000", notablePeople: ["Hemu (Emperor Vikramaditya)"], history: "Capital of the Ahirwal region. Birthplace of Hemu, the last Hindu emperor to sit on the Delhi throne. Strong martial tradition.", image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600" },
+  { id: 5, name: "Vrindavan", state: "Uttar Pradesh", district: "Mathura", dominantGotra: "Nandavanshi", population: "~70,000", notablePeople: ["Lord Krishna (historical)"], history: "The holiest site for the Ahir/Yadav community. Where Lord Krishna spent his childhood among the Gopa Ahirs. Thousands of Ahir families trace their origin here.", image: "https://images.unsplash.com/photo-1609154807254-d5d4f5ce3f82?w=600" },
+  { id: 6, name: "Mahendragarh", state: "Haryana", district: "Mahendragarh", dominantGotra: "Ahirwal", population: "~50,000", notablePeople: [], history: "Central district of the Ahirwal belt. Known for highest military recruitment rates in India, with Ahir families serving in the Indian Army for generations.", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600" },
+  { id: 7, name: "Balali", state: "Haryana", district: "Charkhi Dadri", dominantGotra: "Phogat", population: "~3,000", notablePeople: ["Geeta Phogat", "Babita Phogat"], history: "Famous as the village that produced India's greatest female wrestlers, the Phogat sisters. A small Ahir village that became nationally famous after the film Dangal.", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" },
+  { id: 8, name: "Saifai", state: "Uttar Pradesh", district: "Etawah", dominantGotra: "Yadav", population: "~10,000", notablePeople: ["Mulayam Singh Yadav family"], history: "Home village of the Yadav political dynasty. Has been developed significantly and hosts an annual international sports event.", image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=600" },
+  { id: 9, name: "Ratu", state: "Jharkhand", district: "Ranchi", dominantGotra: "Yadav", population: "~20,000", notablePeople: ["Deepika Kumari (Archer)"], history: "Home of world champion archer Deepika Kumari. A tribal-belt Yadav community with strong sporting tradition.", image: "https://images.unsplash.com/photo-1542718610-a1e3ff5dae7a?w=600" },
+  { id: 10, name: "Champaran", state: "Bihar", district: "West Champaran", dominantGotra: "Yadav", population: "~50,000", notablePeople: ["Manoj Bajpayee"], history: "Birthplace of actor Manoj Bajpayee. West Champaran district has significant Yadav population with deep roots in agricultural and pastoral traditions.", image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600" },
+  { id: 11, name: "Karauli", state: "Rajasthan", district: "Karauli", dominantGotra: "Jadaun", population: "~80,000", notablePeople: [], history: "Ancient seat of the Jadaun Yaduvanshi rulers. One of the oldest surviving Yaduvanshi kingdoms with a palace that still stands today.", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600" },
+  { id: 12, name: "Ahirwal Belt", state: "Haryana", district: "Rewari/Mahendragarh", dominantGotra: "Multiple Ahir", population: "~500,000", notablePeople: [], history: "The heartland of the Ahir community spanning three districts of Haryana. Named after the Ahirs themselves, this region has the highest concentration of Ahir population in India.", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600" },
+  { id: 13, name: "Mathura", state: "Uttar Pradesh", district: "Mathura", dominantGotra: "Nandavanshi/Garg", population: "~400,000", notablePeople: ["Lord Krishna"], history: "Birthplace of Lord Krishna. The most sacred city for the Ahir/Yadav community. Home to numerous Ahir communities who trace their lineage to the original Yadavas.", image: "https://images.unsplash.com/photo-1609154807254-d5d4f5ce3f82?w=600" },
+  { id: 14, name: "Deoghar", state: "Jharkhand", district: "Deoghar", dominantGotra: "Yadav", population: "~30,000", notablePeople: [], history: "Significant Yadav community in Jharkhand's pilgrimage city. Pastoral and dairy traditions remain strong.", image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600" },
+  { id: 15, name: "Gorakhpur", state: "Uttar Pradesh", district: "Gorakhpur", dominantGotra: "Yadav", population: "~600,000", notablePeople: ["Ravi Kishan"], history: "Major city with significant Yadav political and cultural presence. Home of actor-politician Ravi Kishan.", image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600" },
+  { id: 16, name: "Nashik", state: "Maharashtra", district: "Nashik", dominantGotra: "Rawat", population: "~50,000", notablePeople: [], history: "Significant Ahir/Yadav population in Maharashtra's wine capital. Pastoral dairy traditions date back centuries.", image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600" },
+  { id: 17, name: "Rohtak", state: "Haryana", district: "Rohtak", dominantGotra: "Ahir", population: "~100,000", notablePeople: [], history: "Major Ahir-dominated city in Haryana. Known for wrestling culture and army recruitment.", image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600" },
+  { id: 18, name: "Ara", state: "Bihar", district: "Bhojpur", dominantGotra: "Yadav", population: "~70,000", notablePeople: [], history: "Historic city with deep Yadav roots. The Bhojpur district has been a center of Yadav political organizing.", image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600" },
+  { id: 19, name: "Jaipur", state: "Rajasthan", district: "Jaipur", dominantGotra: "Bhati/Jadaun", population: "~200,000", notablePeople: [], history: "Rajasthan's capital has significant Yaduvanshi Yadav communities, particularly in the Bhati and Jadaun gotra traditions.", image: "https://images.unsplash.com/photo-1477587458883-47145ed1eb10?w=600" },
+  { id: 20, name: "Bhopal", state: "Madhya Pradesh", district: "Bhopal", dominantGotra: "Yadav", population: "~100,000", notablePeople: [], history: "MP's capital has a large Yadav community involved in government service, dairy, and politics.", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" },
+  { id: 21, name: "Devagiri (Daulatabad)", state: "Maharashtra", district: "Aurangabad", dominantGotra: "Rawat", population: "~30,000", notablePeople: [], history: "Ancient capital of the Yadava dynasty of the Deccan. The hilltop fort of Devagiri was the center of the greatest Yadav kingdom in medieval India.", image: "https://images.unsplash.com/photo-1548013146-72479768bada?w=600" },
+  { id: 22, name: "Patna", state: "Bihar", district: "Patna", dominantGotra: "Yadav/Goala", population: "~200,000", notablePeople: [], history: "Bihar's capital has a massive Yadav community. The Goala sub-community of dairy Yadavs has been present in Patna for centuries.", image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600" },
+  { id: 23, name: "Agra", state: "Uttar Pradesh", district: "Agra", dominantGotra: "Nandavanshi", population: "~100,000", notablePeople: [], history: "Significant Ahir/Yadav presence in Agra. Located near the sacred Braj region, families here maintain strong Nandavanshi traditions.", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600" },
+  { id: 24, name: "Sikar", state: "Rajasthan", district: "Sikar", dominantGotra: "Rawat/Yadav", population: "~50,000", notablePeople: [], history: "Shekhawati region's Yadav community. Known for merchant and pastoral traditions.", image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600" },
+  { id: 25, name: "Bhiwani", state: "Haryana", district: "Bhiwani", dominantGotra: "Ahir", population: "~80,000", notablePeople: ["Vijender Singh"], history: "Known as the 'City of Boxers', Bhiwani's Ahir community has produced more Indian boxing champions than any other district in India.", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600" }
+];
+```
+
+### /src/data/timeline.js:
+```js
+export const timeline = [
+  { id: 1, year: "~3000 BCE", era: "Ancient", title: "Origin of the Yadu Clan", titleHi: "यदु वंश की उत्पत्ति", description: "The Yadu dynasty is founded by King Yadu, son of King Yayati of the Lunar dynasty (Chandravansha). The Yadus become one of the most powerful clans of ancient India, eventually settling across the Gangetic plains and western India.", image: "https://images.unsplash.com/photo-1609154807254-d5d4f5ce3f82?w=600" },
+  { id: 2, year: "~3102 BCE", era: "Ancient", title: "Lord Krishna — The Divine Yadava", titleHi: "भगवान कृष्ण — दिव्य यादव", description: "Lord Krishna is born in Mathura to the Yaduvanshi family. His life — from childhood in Vrindavan among Ahir families to the battle of Kurukshetra — defines the Yadav identity for all of history.", image: "https://images.unsplash.com/photo-1609154807254-d5d4f5ce3f82?w=600" },
+  { id: 3, year: "200 BCE – 300 CE", era: "Classical", title: "Abhira Kingdoms of Ancient India", titleHi: "प्राचीन भारत के अभीर राज्य", description: "The Abhiras (ancient name for Ahirs) establish powerful kingdoms across Sindh, Gujarat, Maharashtra and the western coast of India. Ancient texts including the Puranas reference Abhira kings and warriors.", image: "https://images.unsplash.com/photo-1548013146-72479768bada?w=600" },
+  { id: 4, year: "850 – 1334 CE", era: "Medieval", title: "Yadava Dynasty of the Deccan", titleHi: "दक्कन का यादव वंश", description: "The Yadava dynasty rules the Deccan from their capital at Devagiri (modern Daulatabad). At its peak, the kingdom controls much of present-day Maharashtra, Karnataka, and Madhya Pradesh. One of the greatest Yadav kingdoms in history.", image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600" },
+  { id: 5, year: "1501 – 1556 CE", era: "Medieval", title: "Hemu — The Ahir Emperor of Delhi", titleHi: "हेमू — दिल्ली का अहीर सम्राट", description: "Hemu, born in Rewari (Haryana), becomes Prime Minister and military general. He wins 22 consecutive battles, captures Agra and Delhi, and crowns himself Emperor Vikramaditya in 1556 — the last Hindu emperor to sit on the Delhi throne.", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" },
+  { id: 6, year: "1857 CE", era: "Colonial", title: "Ahirs in the First War of Independence", titleHi: "स्वतंत्रता संग्राम में अहीर", description: "Ahir soldiers and communities participate in the 1857 revolt against British rule. The Ahirwal region sees significant resistance. British records note the martial capabilities of Ahir fighters.", image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" },
+  { id: 7, year: "1924 CE", era: "Modern", title: "Founding of Yadav Mahasabha", titleHi: "यादव महासभा की स्थापना", description: "The All India Yadav Mahasabha is founded, uniting the diverse Ahir, Goala, Gwala, Rawat, and Yadav sub-communities under one identity. A watershed moment in community organization and political consciousness.", image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600" },
+  { id: 8, year: "1990 CE", era: "Modern", title: "Mandal Commission — Political Transformation", titleHi: "मंडल आयोग — राजनीतिक परिवर्तन", description: "Implementation of Mandal Commission recommendations grants OBC reservations, fundamentally transforming Yadav political power. The Yadav community emerges as one of the most organized and politically powerful communities in north India.", image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" },
+  { id: 9, year: "1992 – 2004 CE", era: "Modern", title: "Peak of Yadav Political Power", titleHi: "यादव राजनीतिक शक्ति का शिखर", description: "Mulayam Singh Yadav and Lalu Prasad Yadav simultaneously dominate UP and Bihar politics. Yadavs hold Chief Ministerships and Cabinet posts at both state and central levels. The community reaches its peak political influence.", image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" },
+  { id: 10, year: "2008 – Present", era: "Contemporary", title: "Yadavs in Sports, Arts & Global Diaspora", titleHi: "खेल, कला और वैश्विक प्रवासी यादव", description: "Olympic boxer Vijender Singh (2008), world champion archer Deepika Kumari, wrestlers Geeta and Babita Phogat — Yadavs dominate Indian sports. Manoj Bajpayee wins National Awards. The Yadav diaspora grows globally across USA, UK, Canada and the Gulf.", image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600" }
+];
+```
+
+### /src/data/matrimonials.js:
+```js
+export const matrimonials = [
+  { id: 1, name: "Rahul Y.", gender: "groom", age: 28, gotra: "Kashyap", state: "Uttar Pradesh", education: "B.Tech (Computer Science)", profession: "Software Engineer", city: "Noida", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=rahul" },
+  { id: 2, name: "Priya Y.", gender: "bride", age: 25, gotra: "Nandavanshi", state: "Bihar", education: "MBBS", profession: "Doctor", city: "Patna", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=priya" },
+  { id: 3, name: "Vikram A.", gender: "groom", age: 30, gotra: "Garg", state: "Haryana", education: "B.Com + MBA", profession: "Bank Manager", city: "Rohtak", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=vikram" },
+  { id: 4, name: "Sunita Y.", gender: "bride", age: 24, gotra: "Bharadwaj", state: "Rajasthan", education: "BA + B.Ed", profession: "School Teacher", city: "Jaipur", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=sunita" },
+  { id: 5, name: "Ajay Y.", gender: "groom", age: 27, gotra: "Atri", state: "Madhya Pradesh", education: "B.E. (Civil)", profession: "Government Engineer", city: "Bhopal", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=ajay" },
+  { id: 6, name: "Kavita A.", gender: "bride", age: 26, gotra: "Vashishtha", state: "Haryana", education: "M.Sc (Chemistry)", profession: "Research Scientist", city: "Gurugram", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=kavita" },
+  { id: 7, name: "Rohit Y.", gender: "groom", age: 32, gotra: "Jadaun", state: "Rajasthan", education: "LLB", profession: "Advocate", city: "Karauli", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=rohit" },
+  { id: 8, name: "Meena Y.", gender: "bride", age: 23, gotra: "Gautam", state: "Bihar", education: "BCA", profession: "IT Professional", city: "Muzaffarpur", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=meena" },
+  { id: 9, name: "Deepak A.", gender: "groom", age: 29, gotra: "Kaushik", state: "Uttar Pradesh", education: "B.Pharma", profession: "Pharmacist", city: "Agra", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=deepak" },
+  { id: 10, name: "Anita Y.", gender: "bride", age: 27, gotra: "Sandilya", state: "Maharashtra", education: "MBA (Finance)", profession: "Finance Analyst", city: "Nashik", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=anita" },
+  { id: 11, name: "Suresh Y.", gender: "groom", age: 31, gotra: "Mor", state: "Haryana", education: "12th + Army Service", profession: "Ex-Army (JCO)", city: "Bhiwani", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=suresh" },
+  { id: 12, name: "Pooja Y.", gender: "bride", age: 25, gotra: "Rawat", state: "Jharkhand", education: "B.Sc (Nursing)", profession: "Nurse", city: "Ranchi", avatar: "https://api.dicebear.com/7.x/thumbs/svg?seed=pooja" }
+];
+```
+
+### /src/data/notices.js:
+```js
+export const notices = [
+  { id: 1, title: "Ahirgarh Annual Sammelan 2024 — Mathura", titleHi: "अहीरगढ़ वार्षिक सम्मेलन 2024 — मथुरा", category: "Announcements", author: "Ahirgarh Editorial", date: "2024-03-01", replies: 24, excerpt: "The annual Yadav community gathering will be held in Mathura this year on the occasion of Janmashtami. All regional chapters are invited.", content: "The annual Yadav community gathering will be held in Mathura on August 26, 2024, coinciding with Janmashtami celebrations. Community leaders, historians, and members from across India are invited to attend. Sessions will cover: Community History and Research, Youth Leadership, Political Representation, and Matrimonial Services. Registration open via WhatsApp." },
+  { id: 2, title: "New Article Added: Hemu — The Last Hindu Emperor of Delhi", category: "Wiki Updates", author: "History Team", date: "2024-02-28", replies: 18, excerpt: "A comprehensive new article on Emperor Hemu of Rewari has been added to the Ahirgarh wiki.", content: "Our history research team has published a comprehensive 3000-word article on Hem Chandra Vikramaditya (Hemu), the Ahir-born emperor who ruled Delhi in 1556. The article covers his rise from grain merchant to military general, his 22 consecutive military victories, and the Battle of Panipat that ended his reign. Read the full article in the History section." },
+  { id: 3, title: "Gotra Documentation Project — Volunteers Needed", category: "General", author: "Research Team", date: "2024-02-25", replies: 31, excerpt: "We are looking for community members who can help document rare and lesser-known Yadav gotras.", content: "Ahirgarh is undertaking a comprehensive Gotra Documentation Project to record all known Yadav/Ahir gotras with their origin stories, geographic distribution, and historical records. If you have knowledge of your family gotra's history, or know of undocumented gotras, please reach out via WhatsApp. Our target is to document 100+ gotras by end of 2024." },
+  { id: 4, title: "Vijender Singh Felicitation Ceremony — Bhiwani", category: "Regional News", author: "Haryana Chapter", date: "2024-02-20", replies: 12, excerpt: "The Haryana Ahir Samaj will felicitate Olympic boxer Vijender Singh at a ceremony in Bhiwani.", content: "The Haryana Ahir Samaj is organizing a felicitation ceremony to honor Olympic Bronze medalist Vijender Singh for his contribution to Indian boxing and his role as an ambassador for the Ahir community. The ceremony will be held in his home district of Bhiwani." },
+  { id: 5, title: "Discussion: Should We Use 'Ahir' or 'Yadav' as Community Name?", category: "General", author: "Member: RK Yadav", date: "2024-02-18", replies: 67, excerpt: "An ongoing debate in the community — which name better represents our identity and history?", content: "This question has been debated for decades. 'Ahir' is the older, more historically accurate name found in ancient Sanskrit texts, while 'Yadav' is more widely used in modern times. Both refer to the same community. What do you think? Share your views." },
+  { id: 6, title: "Youth Forum: Ahir Students in IITs and IIMs — Success Stories", category: "Youth", author: "Youth Wing", date: "2024-02-15", replies: 45, excerpt: "Celebrating young Ahir achievers breaking into India's top institutions.", content: "We are compiling success stories of Ahir/Yadav students who have cleared JEE, NEET, UPSC, and CAT exams to join India's premier institutions. If you or someone you know has a story to share, contact us. We will feature these stories on Ahirgarh as inspiration for younger community members." },
+  { id: 7, title: "Mathura-Vrindavan Heritage Documentation Project Launched", category: "History & Research", author: "Research Team", date: "2024-02-10", replies: 22, excerpt: "Ahirgarh is partnering with historians to document the Ahir heritage of the Braj region.", content: "The Braj region of Mathura-Vrindavan is the heartland of Ahir cultural and religious heritage. Ahirgarh is launching a heritage documentation project to record temples, sites, oral histories, and cultural practices of Ahir communities in the Braj region. Researchers and community volunteers are welcome to join." },
+  { id: 8, title: "Yadava Dynasty of Devagiri — A Forgotten Empire", category: "History & Research", author: "Dr. Suresh Y.", date: "2024-02-05", replies: 29, excerpt: "A research discussion on the medieval Yadava kingdom that ruled the Deccan for 500 years.", content: "The Yadava dynasty of Devagiri (850-1334 CE) ruled much of modern Maharashtra from their hilltop capital. This powerful kingdom is rarely discussed in mainstream Indian history despite its enormous significance. Join the discussion on how we can better document and preserve this legacy." },
+  { id: 9, title: "NRI Yadavs — Community Organizations in UK, USA & Canada", category: "NRI Corner", author: "NRI Team", date: "2024-01-30", replies: 38, excerpt: "A directory of Yadav/Ahir community organizations for the global diaspora.", content: "For Yadav/Ahir families living outside India, we are compiling a directory of community organizations in the UK (British Ahir Association), USA (Yadav Society of North America), and Canada. If you know of organizations not listed, please contact us." },
+  { id: 10, title: "Janmashtami Celebrations 2024 — Events Across India", category: "Announcements", author: "Editorial Team", date: "2024-01-25", replies: 55, excerpt: "Community-organized Janmashtami events happening across India this August.", content: "Janmashtami 2024 falls on August 26. Community organizations across UP, Bihar, Haryana, Rajasthan, and Maharashtra are organizing celebrations. Major events planned in Mathura, Vrindavan, Rewari, Patna, and Mumbai. Check your regional chapter for local events." },
+  { id: 11, name: "Survey: Ahir Community's Top Priorities in 2024", category: "General", author: "Ahirgarh Editorial", date: "2024-01-20", replies: 91, excerpt: "What matters most to you? Education, political representation, cultural preservation, or economic development?", content: "Help us understand community priorities for 2024. Reply to this notice with your thoughts on what the Ahir/Yadav community should focus on most in the coming years. Results will be published in a community report." },
+  { id: 12, title: "Culture Series: Rasiya Folk Music of the Braj Region", category: "Culture", author: "Culture Team", date: "2024-01-15", replies: 17, excerpt: "A new series on Rasiya — the folk music tradition that has defined Ahir cultural identity for centuries.", content: "Rasiya is a centuries-old folk music genre of the Braj region performed predominantly by Ahir communities. Our new Culture Series will document Rasiya performers, lyrics, instruments, and the tradition's connection to Krishna bhakti. Part 1 now available in the Culture section." },
+  { id: 13, title: "Village Database Update — 10 New Villages Added", category: "Wiki Updates", author: "Research Team", date: "2024-01-10", replies: 8, excerpt: "Our villages database now covers 25 significant Ahir villages across India.", content: "We have added 10 new village entries to the Ahirgarh villages database covering Rajasthan, Maharashtra, and Jharkhand. If your village is not in our database and has historical or demographic significance for the Ahir/Yadav community, submit a write-up via WhatsApp." },
+  { id: 14, title: "Book Recommendation: 'Ahir Jati Ka Itihas' by Ram Swarup Joon", category: "History & Research", author: "Member: Amar Y.", date: "2024-01-05", replies: 44, excerpt: "A classic historical text on Ahir community history — required reading for every community member.", content: "This landmark book by Ram Swarup Joon is considered the most comprehensive historical account of the Ahir/Yadav community. It covers origins, kingdoms, culture, and modern history. Highly recommended. Available at major bookstores and online." },
+  { id: 15, title: "Matrimonial Season — How to List Your Profile on Ahirgarh", category: "Announcements", author: "Ahirgarh Editorial", date: "2024-01-01", replies: 33, excerpt: "Simple guide to listing a matrimonial profile on our community notice board.", content: "To list a matrimonial profile on Ahirgarh, send a message to our WhatsApp number with: Name (or initials), Age, Gotra, State/City, Education, Profession, and contact preference. Profiles are reviewed and posted within 48 hours. Ahirgarh does not store personal data — contact is facilitated through WhatsApp only." }
+];
+```
+
+### /src/data/translations.js:
+```js
+export const translations = {
+  en: {
+    nav: { home: "Home", wiki: "Wiki", gotras: "Gotras", personalities: "Personalities", villages: "Villages", history: "History", culture: "Culture", matrimonials: "Matrimonials", noticeBoard: "Notice Board", about: "About" },
+    hero: { headline: "The Digital Fort of the Ahir Community", subHeadline: "Explore history, gotras, personalities, villages, and the rich heritage of the Ahir/Yadav community", exploreWiki: "Explore Wiki", viewGotras: "View Gotras" },
+    stats: { articles: "Wiki Articles", gotras: "Gotras Documented", villages: "Villages Listed", personalities: "Famous Personalities" },
+    sections: { featuredArticle: "Featured Article", latestArticles: "Latest Articles", readMore: "Read More →", viewAll: "View All →" },
+    footer: { tagline: "The Digital Fort of the Ahir Community. Built with pride for every Yadav, Ahir, Goala and Rawat across the world.", rights: "All rights reserved.", builtWith: "Built with pride by the Ahir community" }
+  },
+  hi: {
+    nav: { home: "होम", wiki: "विकी", gotras: "गोत्र", personalities: "प्रसिद्ध व्यक्तित्व", villages: "गाँव", history: "इतिहास", culture: "संस्कृति", matrimonials: "वैवाहिक", noticeBoard: "सूचना पट्ट", about: "हमारे बारे में" },
+    hero: { headline: "अहीर समाज का डिजिटल किला", subHeadLine: "अहीर/यादव समाज का इतिहास, गोत्र, व्यक्तित्व, गाँव और विरासत खोजें", exploreWiki: "विकी देखें", viewGotras: "गोत्र देखें" },
+    stats: { articles: "विकी लेख", gotras: "दर्ज गोत्र", villages: "गाँव सूचीबद्ध", personalities: "प्रसिद्ध व्यक्तित्व" },
+    sections: { featuredArticle: "विशेष लेख", latestArticles: "नवीनतम लेख", readMore: "और पढ़ें →", viewAll: "सभी देखें →" },
+    footer: { tagline: "अहीर समाज का डिजिटल किला। दुनिया भर के हर यादव, अहीर, गोआला और रावत के लिए गर्व से बनाया गया।", rights: "सर्वाधिकार सुरक्षित।", builtWith: "अहीर समाज द्वारा गर्व से निर्मित" }
+  }
+};
+```
+
+---
+
+## 🧩 COMPONENTS — BUILD EACH EXACTLY AS SPECIFIED:
+
+### Navbar.jsx:
+- Sticky top-0, z-50
+- glassmorphism: bg-white/80 dark:bg-[#0D0A07]/80 backdrop-blur-xl border-b border-[#F0E4D4] dark:border-[#2E1F0F]
+- Logo: peacock SVG icon (simple, elegant) + "Ahirgarh" in Playfair Display with a gradient saffron-to-gold span
+- Desktop nav links: Home | Wiki | Gotras | Personalities | Villages | History | Culture | Matrimonials | Notice Board | About — each using NavLink from react-router-dom with active class showing saffron underline
+- Right side controls:
+  1. Search icon button → opens SearchModal (sets isSearchOpen state to true)
+  2. Language toggle pill: "EN | हिं" — clicking toggles language via LanguageContext
+  3. Dark/light toggle: Sun icon in light mode, Moon icon in dark mode. Clicking calls toggleTheme(). Smooth icon swap with Framer Motion rotate
+- Mobile: hamburger (MenuIcon / XIcon toggle), clicking opens full-screen overlay menu with all nav links, staggered entrance animation. Menu closes on link click.
+- Keyboard shortcut: add useEffect that listens for Ctrl+K / Cmd+K to open search modal
+
+### SearchModal.jsx:
+- Renders as a fixed full-screen overlay (bg-black/60 backdrop-blur-sm) when isSearchOpen=true
+- Modal card: centered, max-w-2xl, glassmorphism, rounded-2xl
+- Input: autofocused on open, placeholder "Search Ahirgarh... articles, gotras, personalities, villages"
+- useEffect on input change: run Fuse.js search across combined data from all data files
+- Results: grouped by type with colored category pills. Each result is clickable → navigates to correct route → closes modal
+- Close: clicking backdrop, pressing Escape, or clicking X button all close modal
+- Empty state: "No results found. Try 'Krishna', 'Kashyap', 'Rewari'..."
+- Framer Motion: AnimatePresence with scale + fade animation
+
+### Hero.jsx:
+- Full viewport height (h-screen)
+- Animated gradient mesh background: 3 floating blobs (saffron, maroon, gold) using CSS keyframe animation (slow, 8-10s, infinite, alternate)
+- Grain texture: SVG feTurbulence noise filter overlay at very low opacity (0.04)
+- Centered content with glassmorphism card overlay
+- Large Hindi heading: "अहीर समाज का डिजिटल किला" in Noto Sans Devanagari, gradient text
+- English subtitle below
+- Two CTA buttons: "Explore Wiki →" (filled, saffron bg) + "View Gotras" (ghost outline, saffron border)
+- Bouncing scroll chevron at bottom center
+- Parallax: use onScroll listener or CSS transform to shift background at 0.5x scroll speed
+
+### StatsBar.jsx:
+- 4 cards in a row (flex-wrap)
+- Each card: glassmorphism, icon (Lucide), animated count-up number using useEffect + setInterval when component enters viewport (use Intersection Observer)
+- Numbers: 500+ Articles | 30+ Gotras | 25+ Villages | 15+ Personalities
+
+### BentoGrid.jsx:
+- CSS Grid: `grid-cols-4 grid-rows-3` on desktop
+- Large card (col-span-2 row-span-2): History — atmospheric sepia image background, gradient overlay, large white text. onClick → navigate('/history')
+- Medium card (col-span-2 row-span-1): Gotras — saffron gradient, floating gotra name tags. onClick → navigate('/gotras')
+- Medium card (col-span-1 row-span-2): Famous Personalities — maroon gradient, circular avatar grid. onClick → navigate('/personalities')
+- Small cards: Villages, Culture, Matrimonials, Notice Board — each with icon, title, subtle gradient. Each navigates to correct route.
+- All cards: hover → translateY(-4px), border glow in accent color, cursor-pointer, Framer Motion whileHover
+
+### Footer.jsx:
+- 4-column grid: About Ahirgarh | Explore | Community | Connect
+- Dark maroon/dark bg
+- Logo repeated
+- "Jai Yadav 🙏" tagline
+- Decorative lotus SVG divider at top
+- All footer links navigate to correct routes using React Router Link
+- Social buttons: WhatsApp (href="https://wa.me/"), YouTube, Facebook — open in new tab
+
+### BackToTop.jsx:
+- Fixed bottom-8 right-8 button, appears when scrollY > 300 using useEffect
+- Saffron bg, white arrow up icon
+- Smooth scroll to top on click
+- Framer Motion: AnimatePresence fade/scale in and out
+
+---
+
+## 📄 PAGE SPECIFICATIONS:
+
+### HomePage.jsx:
+Import and render in order: AnnouncementTicker → Navbar (in layout) → Hero → StatsBar → BentoGrid → FeaturedArticle → LatestArticles section → Footer (in layout)
+
+FeaturedArticle: pick random article from articles.js where featured=true using useMemo(() => articles.filter(a=>a.featured)[Math.floor(Math.random()*featured.length)], [])
+
+LatestArticles: show last 3 articles, horizontal scroll on mobile, 3-col grid on desktop
+
+### WikiPage.jsx (/wiki):
+- Left sidebar (sticky, hidden on mobile): category list — All, Introduction, History, Culture, Modern Era, Organizations. Clicking filters articles.
+- Main: filtered article cards in responsive grid
+- Each ArticleCard: category color tag, image, title, excerpt, read time, "Read Article →" button that navigates to /wiki/:slug
+
+### ArticlePage.jsx (/wiki/:slug):
+- useParams to get slug, find article from articles.js
+- If not found: show 404 message with "Back to Wiki" button → navigate('/wiki')
+- Reading progress bar: fixed top-0 left-0, height 3px, saffron bg, width = scrollY/documentHeight * 100%
+- TOC sidebar: extract headings from content, show sticky sidebar. Since content is plain text, just show "In this article" with hardcoded sections.
+- Article body: large Playfair Display title, gradient banner, first paragraph with CSS drop-cap, beautiful paragraph spacing
+- Related articles: 3 cards from same category at bottom, each navigates to /wiki/:slug
+
+### GotrasPage.jsx (/gotras):
+- Search input using Fuse.js state
+- Vansh tabs: All | Yaduvanshi | Nandavanshi | Krishnavanshi | Chandravanshi — filter gotras
+- Region pill filters: All | UP | Bihar | Haryana | Rajasthan | Maharashtra
+- Gotra cards grid with Indian geometric pattern watermark SVG in corner
+- Each card "View Details →" navigates to /gotras/:id
+
+### GotraDetailPage.jsx (/gotras/:id):
+- useParams id, find gotra from gotras.js
+- If not found → navigate('/gotras')
+- Back button → navigate(-1)
+- Show: name, Hindi name, vansh badge, region tags, full description
+- "People from this Gotra" section: filter personalities.js by gotra field matching gotra name (fuzzy match). Show personality cards that link to /personalities/:id
+- Related Gotras: show 3 other gotras from same vansh
+
+### PersonalitiesPage.jsx (/personalities):
+- Category filter tabs: All | Politicians | Bollywood | Sports | Military | Spiritual | Business
+- Masonry/grid of personality cards
+- Each card: image (rounded, object-cover), name, one-liner, category badge, gotra
+- Hover effect: card lifts + subtle gold border glow
+- "View Profile →" → navigate('/personalities/:id')
+
+### PersonalityDetailPage.jsx (/personalities/:id):
+- useParams id, find from personalities.js
+- Not found → navigate('/personalities')
+- Back button
+- Full editorial layout: left column photo + key facts table (Gotra, Born/Died, State, Achievement)
+- Right column: full bio text
+- Related Personalities section at bottom (same category, 3 cards, navigate to /personalities/:id)
+
+### VillagesPage.jsx (/villages):
+- Search bar (Fuse.js on name, state, district, dominantGotra)
+- State filter dropdown: All States | UP | Bihar | Haryana | Rajasthan | Maharashtra | Jharkhand | MP | Rajasthan
+- Village cards: image, name, state badge, district, dominant gotra tag
+- "View Village →" → navigate('/villages/:id')
+- Static India map: SVG of India (simplified, showing major states as clickable paths). Clicking a state filters the list. Tooltip on hover.
+
+### VillageDetailPage.jsx (/villages/:id):
+- useParams, find village
+- Not found → navigate('/villages')
+- Back button
+- Full detail: image hero, location info table, history text, notable people list
+- "Know more? Submit via WhatsApp" button → opens wa.me link
+
+### HistoryPage.jsx (/history):
+- Page header with gradient banner
+- Visual timeline: alternating left/right cards using CSS. Each timeline item from timeline.js: year badge (saffron pill), event title, description, optional image
+- Below timeline: 3 featured history articles from articles.js filtered by category "History", each card links to /wiki/:slug
+
+### CulturePage.jsx (/culture):
+- Sections: Festivals | Music & Dance | Language | Food | Traditional Dress | Pastoral Heritage
+- Each section: icon, title, description paragraphs, image card
+- Image gallery section: 6-image masonry grid using columns-3. Clicking an image opens a lightbox modal (Framer Motion AnimatePresence, full screen with backdrop, close on click/Escape)
+- Use Unsplash images with relevant search terms
+
+### MatrimonialsPage.jsx (/matrimonials):
+- Top banner: "Community Matrimonial Notice Board" with disclaimer
+- Large CTA card: "List Your Profile" → wa.me link
+- Filter bar: Gender (All/Bride/Groom), State dropdown, Gotra search input, Age range (18-25, 26-30, 31-35, 35+)
+- Profile cards grid: DiceBear avatar, Name, Age, Gotra badge, State, Education, Profession
+- "Contact via WhatsApp" button on each card → opens wa.me link
+- Contact info never shown directly
+
+### NoticeBoardPage.jsx (/notice-board):
+- Left sidebar: category filters (General | Announcements | Wiki Updates | History & Research | Regional News | Youth | Culture | NRI Corner)
+- Main: notice cards sorted by date (newest first)
+- Notice card: category colored pill, title, author, date, static reply count badge, excerpt
+- Clicking a notice card expands it inline (accordion with Framer Motion height animation) showing full content
+- "Reply" button on expanded notice → window.location.href = "mailto:ahirgarh@gmail.com?subject=Re: " + notice.title
+
+### AboutPage.jsx (/about):
+- Mission statement section
+- How to contribute (submit articles/corrections via WhatsApp or email)
+- Team section (3 hardcoded "editor" cards with DiceBear avatars)
+- Contact section: WhatsApp button + email button (mailto:)
+- FAQ accordion: 5 common questions about Ahirgarh
+
+---
+
+## ⚡ FRAMER MOTION ANIMATIONS (use throughout):
+```jsx
+// Page transition wrapper - wrap every page content in this:
+<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
+
+// Card hover:
+<motion.div whileHover={{ y: -4, boxShadow: "0 20px 40px rgba(232,80,10,0.15)" }} transition={{ type: "spring", stiffness: 300 }}>
+
+// Scroll reveal (use on section entries):
+<motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+
+// Staggered children:
+<motion.div variants={{ container: { transition: { staggerChildren: 0.1 } }, item: { initial: { opacity:0, y:20 }, animate: { opacity:1, y:0 } } }}>
+```
+
+---
+
+## 🏁 FINAL CHECKLIST — VERIFY BEFORE SHIPPING:
+
+- [ ] All 14 routes defined and working in App.jsx
+- [ ] Every navbar link navigates to correct page
+- [ ] Every detail page (article, gotra, personality, village) reads :id/:slug param and shows correct data
+- [ ] Every "not found" case redirects to parent page
+- [ ] Dark mode toggle works and persists in localStorage
+- [ ] Language toggle (EN/HI) works across nav and hero
+- [ ] Fuse.js search works in: SearchModal (global), WikiPage, GotrasPage, VillagesPage
+- [ ] SearchModal opens on search icon click AND Ctrl/Cmd+K
+- [ ] SearchModal results navigate to correct pages and close modal
+- [ ] All "Contact via WhatsApp" buttons link to a real wa.me URL (use https://wa.me/919999999999)
+- [ ] All "mailto:" links work
+- [ ] BackToTop button appears on scroll, scrolls to top
+- [ ] Reading progress bar works on ArticlePage
+- [ ] Count-up animation triggers on StatsBar viewport entry
+- [ ] Mobile hamburger menu opens/closes, all links work, closes on navigation
+- [ ] Image lightbox opens/closes on CulturePage
+- [ ] Notice board accordion expands/collapses
+- [ ] Matrimonial filters (gender, state, age) all work correctly
+- [ ] Personality filters (category tabs) work correctly
+- [ ] Gotra vansh tabs + region filters work correctly
+- [ ] Timeline renders correctly on HistoryPage
+- [ ] All external links open in new tab (target="_blank" rel="noopener noreferrer")
+- [ ] Footer links all navigate correctly via React Router Link
+- [ ] Custom scrollbar visible
+- [ ] Grain texture overlay on hero
+- [ ] Animated gradient mesh on hero
+- [ ] All pages scroll to top on navigation (add useEffect with window.scrollTo(0,0) on route change)
+
+---
+
+This is a COMPLETE, PRODUCTION-READY build. Every button works. Every link navigates. Every filter functions. No placeholders. No TODOs. Ship Ahirgarh.
