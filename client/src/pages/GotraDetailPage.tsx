@@ -48,29 +48,6 @@ export default function GotraDetailPage() {
           </div>
         </div>
 
-        {/* Notable People */}
-        {peopleFromGotra.length > 0 && (
-          <div className="mb-12">
-            <div className="flex items-center mb-6">
-              <Users className="w-6 h-6 text-primary mr-3" />
-              <h2 className="text-2xl font-display font-bold text-foreground">Associated Personalities</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {peopleFromGotra.slice(0,4).map(p => (
-                <Link key={p.id} href={`/personalities/${p.id}`}>
-                  <div className="glass-card p-4 rounded-2xl flex items-center cursor-pointer">
-                    <img src={p.image} alt={p.name} className="w-16 h-16 rounded-full object-cover mr-4" />
-                    <div>
-                      <h4 className="font-bold text-foreground hover:text-primary transition-colors">{p.name}</h4>
-                      <p className="text-xs text-muted-foreground">{p.category}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Related Gotras */}
         {relatedGotras.length > 0 && (
           <div>

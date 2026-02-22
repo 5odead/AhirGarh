@@ -186,17 +186,6 @@ export default function HomePage() {
 
   return (
     <PageWrapper>
-      {/* Ticker */}
-      <div className="bg-primary text-primary-foreground text-xs py-2 overflow-hidden whitespace-nowrap">
-        <motion.div 
-          animate={{ x: ["100%", "-100%"] }} 
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="inline-block"
-        >
-          <span className="font-semibold">LATEST UPDATE:</span> Ahirgarh Annual Sammelan 2024 to be held in Mathura. Register now via Notice Board. • New Article: Emperor Hemu added to Wiki • Document your gotra today!
-        </motion.div>
-      </div>
-
       <Hero />
       <StatsBar />
       <BentoGrid />
