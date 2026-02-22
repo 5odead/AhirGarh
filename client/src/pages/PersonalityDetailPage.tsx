@@ -39,10 +39,6 @@ export default function PersonalityDetailPage() {
                 <div><p className="text-xs text-muted-foreground">Origin State</p><p className="font-semibold text-sm">{person.state}</p></div>
               </div>
               <div className="flex items-center p-3 bg-background rounded-xl shadow-sm border border-border/50">
-                <Users className="w-5 h-5 text-primary mr-3" />
-                <div><p className="text-xs text-muted-foreground">Gotra</p><p className="font-semibold text-sm">{person.gotra}</p></div>
-              </div>
-              <div className="flex items-center p-3 bg-background rounded-xl shadow-sm border border-border/50">
                 <Calendar className="w-5 h-5 text-primary mr-3" />
                 <div><p className="text-xs text-muted-foreground">Lifespan</p><p className="font-semibold text-sm">{person.born} - {person.died || 'Present'}</p></div>
               </div>

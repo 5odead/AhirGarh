@@ -9,7 +9,6 @@ export default function AboutPage() {
     { q: "What is Ahirgarh?", a: "Ahirgarh is a community-driven digital encyclopedia and portal dedicated to preserving and sharing the history, culture, and achievements of the Ahir/Yadav community worldwide." },
     { q: "How can I contribute an article?", a: "You can submit historically accurate, well-researched articles by emailing us or sending a WhatsApp message. Our editorial team reviews all submissions before publishing." },
     { q: "Is Ahirgarh affiliated with any political party?", a: "No. Ahirgarh is strictly a cultural, historical, and community heritage platform. We are politically neutral and independent." },
-    { q: "How do I list a matrimonial profile?", a: "Send your details via WhatsApp to our official number. We do not store or display direct contact numbers on the site for privacy reasons." },
     { q: "Who built this platform?", a: "Ahirgarh was built by a group of community volunteers and tech professionals who wanted to create a modern digital home for our heritage." }
   ];
 
@@ -27,7 +26,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="glass p-8 rounded-3xl text-center">
             <h3 className="text-2xl font-bold mb-4">Join via WhatsApp</h3>
-            <p className="text-muted-foreground mb-6">Get weekly updates, submit articles, or list matrimonial profiles directly through our secure WhatsApp channel.</p>
+            <p className="text-muted-foreground mb-6">Get weekly updates or submit articles directly through our secure WhatsApp channel.</p>
             <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#1DA851] transition-colors shadow-lg">
               <MessageCircle className="w-5 h-5 mr-2" /> Message Us
             </a>

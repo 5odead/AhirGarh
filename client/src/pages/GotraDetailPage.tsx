@@ -14,7 +14,7 @@ export default function GotraDetailPage() {
   if (!gotra) return <div className="text-center py-20"><h1 className="text-2xl">Gotra Not Found</h1><Link href="/gotras"><span className="text-primary hover:underline">Go Back</span></Link></div>;
 
   const peopleFromGotra = personalities.filter(p => p.gotra.toLowerCase() === gotra.name.toLowerCase() || p.gotra === 'Yadav'); // simplistic match for demo
-  const relatedGotras = gotras.filter(g => g.vansh === gotra.vansh && g.id !== gotra.id).slice(0, 3);
+  const relatedGotras = gotras.filter(g => g.id !== gotra.id).slice(0, 3);
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-background pt-12 pb-24">
@@ -33,9 +33,6 @@ export default function GotraDetailPage() {
           </div>
           
           <div className="relative z-10">
-            <span className="px-4 py-1.5 bg-accent text-white text-sm font-bold rounded-full tracking-wider uppercase mb-6 inline-block">
-              {gotra.vansh} Lineage
-            </span>
             <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-2">
               {gotra.name} <span className="text-primary font-hindi ml-2">{gotra.nameHi}</span>
             </h1>
@@ -77,7 +74,7 @@ export default function GotraDetailPage() {
         {/* Related Gotras */}
         {relatedGotras.length > 0 && (
           <div>
-            <h2 className="text-2xl font-display font-bold text-foreground mb-6">Other {gotra.vansh} Gotras</h2>
+            <h2 className="text-2xl font-display font-bold text-foreground mb-6">Other Gotras</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {relatedGotras.map(g => (
                 <Link key={g.id} href={`/gotras/${g.id}`}>

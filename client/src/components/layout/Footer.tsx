@@ -40,7 +40,6 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li><Link href="/personalities"><span className="hover:text-primary cursor-pointer transition-colors">{t.nav.personalities}</span></Link></li>
               <li><Link href="/villages"><span className="hover:text-primary cursor-pointer transition-colors">{t.nav.villages}</span></Link></li>
-              <li><Link href="/matrimonials"><span className="hover:text-primary cursor-pointer transition-colors">{t.nav.matrimonials}</span></Link></li>
               <li><Link href="/notice-board"><span className="hover:text-primary cursor-pointer transition-colors">{t.nav.noticeBoard}</span></Link></li>
             </ul>
           </div>

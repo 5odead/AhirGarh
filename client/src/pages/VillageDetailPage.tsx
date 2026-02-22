@@ -37,14 +37,6 @@ export default function VillageDetailPage() {
 
           <div className="p-8 md:p-12 flex flex-col md:flex-row gap-12">
             <div className="w-full md:w-1/3 space-y-6">
-              <div className="glass p-5 rounded-2xl border border-border bg-muted/5">
-                <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-1">Dominant Gotra</h4>
-                <p className="text-xl font-display font-bold text-foreground">{village.dominantGotra}</p>
-              </div>
-              <div className="glass p-5 rounded-2xl border border-border bg-muted/5">
-                <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-1">Est. Population</h4>
-                <p className="text-xl font-display font-bold text-foreground">{village.population}</p>
-              </div>
               {village.notablePeople.length > 0 && (
                 <div className="glass p-5 rounded-2xl border border-border bg-muted/5">
                   <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-2 flex items-center"><Users className="w-4 h-4 mr-2"/> Notable People</h4>

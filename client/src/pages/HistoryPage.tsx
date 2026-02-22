@@ -21,9 +21,9 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
         
-        <div className="relative border-l-2 border-primary/30 ml-4 md:ml-1/2 md:-translate-x-1/2 space-y-12 pb-20">
+        <div className="relative border-l-2 border-primary/30 ml-4 md:ml-[50%] md:-translate-x-[1px] space-y-12 pb-20">
           {timeline.map((event, index) => {
             const isEven = index % 2 === 0;
             return (
@@ -35,10 +35,10 @@ export default function HistoryPage() {
                 className={`relative flex items-center justify-between md:justify-normal w-full ${isEven ? 'md:flex-row-reverse' : ''}`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-4 h-4 rounded-full bg-primary ring-4 ring-background z-10" />
+                <div className="absolute left-[-9px] md:left-[0px] md:-ml-[7px] w-3.5 h-3.5 rounded-full bg-primary ring-4 ring-background z-10" />
                 
                 {/* Card */}
-                <div className={`ml-8 md:ml-0 md:w-5/12 glass-card p-6 rounded-2xl ${isEven ? 'md:mr-auto' : 'md:ml-auto'}`}>
+                <div className={`ml-8 md:ml-0 md:w-[45%] glass-card p-6 rounded-2xl ${isEven ? 'md:mr-auto' : 'md:ml-auto'}`}>
                   <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">{event.year} • {event.era}</span>
                   <h3 className="text-2xl font-display font-bold text-foreground mb-1">{event.title}</h3>
                   <h4 className="text-sm font-hindi text-muted-foreground mb-4">{event.titleHi}</h4>

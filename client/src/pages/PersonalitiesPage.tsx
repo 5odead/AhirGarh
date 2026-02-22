@@ -51,8 +51,7 @@ export default function PersonalitiesPage() {
                   </div>
                   <div className="p-5">
                     <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{person.bio}</p>
-                    <div className="flex justify-between items-center text-xs text-muted-foreground border-t border-border/50 pt-3">
-                      <span className="font-semibold">{person.gotra} Gotra</span>
+                    <div className="flex justify-end items-center text-xs text-muted-foreground border-t border-border/50 pt-3">
                       <span>{person.state}</span>
                     </div>
                   </div>

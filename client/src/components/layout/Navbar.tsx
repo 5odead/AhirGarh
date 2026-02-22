@@ -21,7 +21,6 @@ export default function Navbar() {
     { name: t.nav.villages, path: '/villages' },
     { name: t.nav.history, path: '/history' },
     { name: t.nav.culture, path: '/culture' },
-    { name: t.nav.matrimonials, path: '/matrimonials' },
     { name: t.nav.noticeBoard, path: '/notice-board' },
     { name: t.nav.about, path: '/about' },
   ];

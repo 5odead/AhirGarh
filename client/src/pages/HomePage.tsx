@@ -143,17 +143,9 @@ function BentoGrid() {
 
           {/* Culture */}
           <Link href="/culture">
-            <motion.div whileHover={{ y: -4, scale: 0.99 }} className="glass-card p-6 h-full flex flex-col justify-center items-center text-center cursor-pointer">
+            <motion.div whileHover={{ y: -4, scale: 0.99 }} className="glass-card p-6 h-full flex flex-col justify-center items-center text-center cursor-pointer md:col-span-1">
               <Heart className="w-8 h-8 text-primary mb-3" />
               <h3 className="text-xl font-display font-bold text-foreground">Culture</h3>
-            </motion.div>
-          </Link>
-
-          {/* Matrimonials */}
-          <Link href="/matrimonials">
-            <motion.div whileHover={{ y: -4, scale: 0.99 }} className="glass-card p-6 h-full flex flex-col justify-center items-center text-center cursor-pointer">
-              <Users className="w-8 h-8 text-accent mb-3" />
-              <h3 className="text-xl font-display font-bold text-foreground">Matrimonials</h3>
             </motion.div>
           </Link>
 

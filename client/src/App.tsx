@@ -28,7 +28,6 @@ import VillagesPage from "@/pages/VillagesPage";
 import VillageDetailPage from "@/pages/VillageDetailPage";
 import HistoryPage from "@/pages/HistoryPage";
 import CulturePage from "@/pages/CulturePage";
-import MatrimonialsPage from "@/pages/MatrimonialsPage";
 import NoticeBoardPage from "@/pages/NoticeBoardPage";
 import AboutPage from "@/pages/AboutPage";
 import NotFound from "@/pages/not-found";
@@ -48,7 +47,6 @@ function Router() {
         <Route path="/villages/:id" component={VillageDetailPage}/>
         <Route path="/history" component={HistoryPage}/>
         <Route path="/culture" component={CulturePage}/>
-        <Route path="/matrimonials" component={MatrimonialsPage}/>
         <Route path="/notice-board" component={NoticeBoardPage}/>
         <Route path="/about" component={AboutPage}/>
         <Route component={NotFound} />

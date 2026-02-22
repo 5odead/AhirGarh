@@ -62,8 +62,7 @@ export default function VillagesPage() {
                     <h3 className="text-2xl font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{village.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4 font-medium">{village.district} District</p>
                     <div className="mt-auto pt-4 border-t border-border flex justify-between items-center text-sm">
-                      <span className="bg-primary/10 text-primary px-2 py-1 rounded font-semibold">{village.dominantGotra}</span>
-                      <span className="text-muted-foreground">{village.population}</span>
+                      <span className="text-muted-foreground">{village.district} District</span>
                     </div>
                   </div>
                 </div>

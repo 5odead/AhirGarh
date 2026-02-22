@@ -21,7 +21,7 @@ export default function SearchModal() {
     ...articles.map(a => ({ type: 'Article', id: a.slug, title: a.title, desc: a.excerpt, url: `/wiki/${a.slug}`, icon: FileText })),
     ...gotras.map(g => ({ type: 'Gotra', id: g.id.toString(), title: g.name, desc: g.description, url: `/gotras/${g.id}`, icon: Shield })),
     ...personalities.map(p => ({ type: 'Personality', id: p.id.toString(), title: p.name, desc: p.bio, url: `/personalities/${p.id}`, icon: User })),
-    ...villages.map(v => ({ type: 'Village', id: v.id.toString(), title: v.name, desc: `${v.district}, ${v.state}`, url: `/villages/${v.id}`, icon: MapPin }))
+    ...villages.map(v => ({ type: 'Village', id: v.id.toString(), title: v.name, desc: v.district, url: `/villages/${v.id}`, icon: MapPin }))
   ];
 
   const fuse = new Fuse(combinedData, {
