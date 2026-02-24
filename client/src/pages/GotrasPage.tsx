@@ -74,9 +74,9 @@ export default function GotrasPage() {
           <span className="font-bold text-foreground truncate">{gotra.name}</span>
           <span className="text-sm text-muted-foreground font-hindi truncate hidden sm:inline">{gotra.nameHi}</span>
         </div>
-        <div className="flex gap-1 ml-2">
-          {gotra.regions.slice(0, 2).map(r => (
-            <span key={r} className="text-[10px] px-1.5 py-0.5 bg-muted border border-border rounded text-muted-foreground uppercase font-bold tracking-tighter">
+        <div className="flex gap-1 ml-2 shrink-0">
+          {gotra.regions.slice(0, 3).map(r => (
+            <span key={r} className="text-[10px] px-2 py-0.5 bg-primary/10 border border-primary/20 rounded-full text-primary uppercase font-bold tracking-tighter">
               {r}
             </span>
           ))}
@@ -215,6 +215,28 @@ export default function GotrasPage() {
               </div>
             )}
           </AnimatePresence>
+          
+          {/* Disclaimer */}
+          <div className="mt-16 p-8 glass rounded-3xl border border-primary/20 bg-primary/5">
+            <h3 className="text-xl font-display font-bold text-foreground mb-4 flex items-center">
+              <span className="mr-2">📋</span> A Note on Gotra Names
+            </h3>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                Gotra names across India vary significantly in spelling and pronunciation by region. The same gotra may be written as 
+                <span className="text-foreground font-semibold"> "Dagar"</span> in Haryana, 
+                <span className="text-foreground font-semibold"> "Daagar"</span> in Rajasthan, or 
+                <span className="text-foreground font-semibold"> "Dagur"</span> in UP — they are the same lineage.
+              </p>
+              <p>
+                If you cannot find your gotra, look for similar sounding names — it may be listed under a different regional spelling. 
+                This database is actively growing and your gotra will be added soon.
+              </p>
+              <p className="pt-2 border-t border-border/50">
+                If you'd like to add or correct a gotra, <Link href="/about"><span className="text-primary font-bold hover:underline cursor-pointer">contact us</span></Link>.
+              </p>
+            </div>
+          </div>
           
           {filteredGotras.length === 0 && (
             <div className="text-center py-24 glass rounded-3xl">
