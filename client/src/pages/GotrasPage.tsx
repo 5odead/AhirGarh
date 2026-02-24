@@ -98,6 +98,25 @@ export default function GotrasPage() {
           </div>
         </div>
 
+        {/* Top Disclaimer */}
+        <div className="mb-8 p-6 glass rounded-2xl border border-primary/20 bg-primary/5">
+          <h3 className="text-lg font-display font-bold text-foreground mb-3 flex items-center">
+            <span className="mr-2">📋</span> A Note on Gotra Names
+          </h3>
+          <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+            <p>
+              Gotra names across India vary significantly in spelling and pronunciation by region. The same gotra may be written as 
+              <span className="text-foreground font-semibold"> "Dagar"</span> in Haryana, 
+              <span className="text-foreground font-semibold"> "Daagar"</span> in Rajasthan, or 
+              <span className="text-foreground font-semibold"> "Dagur"</span> in UP — they are the same lineage.
+            </p>
+            <p>
+              If you cannot find your gotra, look for similar sounding names. This database is actively growing and your gotra will be added soon.
+              To add or correct a gotra, <Link href="/about"><span className="text-primary font-bold hover:underline cursor-pointer">contact us</span></Link>.
+            </p>
+          </div>
+        </div>
+
         {/* Filters & Search */}
         <div className="glass p-6 rounded-3xl mb-4 shadow-md flex flex-col gap-4 sticky top-20 z-40 bg-background/80 backdrop-blur-md">
           <div className="flex flex-col md:flex-row gap-4">
@@ -215,28 +234,6 @@ export default function GotrasPage() {
               </div>
             )}
           </AnimatePresence>
-          
-          {/* Disclaimer */}
-          <div className="mt-16 p-8 glass rounded-3xl border border-primary/20 bg-primary/5">
-            <h3 className="text-xl font-display font-bold text-foreground mb-4 flex items-center">
-              <span className="mr-2">📋</span> A Note on Gotra Names
-            </h3>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                Gotra names across India vary significantly in spelling and pronunciation by region. The same gotra may be written as 
-                <span className="text-foreground font-semibold"> "Dagar"</span> in Haryana, 
-                <span className="text-foreground font-semibold"> "Daagar"</span> in Rajasthan, or 
-                <span className="text-foreground font-semibold"> "Dagur"</span> in UP — they are the same lineage.
-              </p>
-              <p>
-                If you cannot find your gotra, look for similar sounding names — it may be listed under a different regional spelling. 
-                This database is actively growing and your gotra will be added soon.
-              </p>
-              <p className="pt-2 border-t border-border/50">
-                If you'd like to add or correct a gotra, <Link href="/about"><span className="text-primary font-bold hover:underline cursor-pointer">contact us</span></Link>.
-              </p>
-            </div>
-          </div>
           
           {filteredGotras.length === 0 && (
             <div className="text-center py-24 glass rounded-3xl">
