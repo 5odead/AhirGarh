@@ -36,19 +36,18 @@ export default function GotraDetailPage() {
             <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-2">
               {gotra.name} <span className="text-primary font-hindi ml-2">{gotra.nameHi}</span>
             </h1>
-            
-            <div className="flex items-center text-muted-foreground mt-6 mb-8 bg-muted/10 p-4 rounded-xl w-max">
-              <MapPin className="w-5 h-5 mr-3 text-primary" />
-              <span className="font-medium">Primarily found in: {gotra.regions.join(", ")}</span>
-            </div>
 
-            <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
-              <p className="text-xl leading-relaxed text-foreground/80">{gotra.description}</p>
-            </div>
+            {/* Regions */}
+            {gotra.regions.length > 0 && (
+              <div className="flex items-center text-muted-foreground mt-6 bg-muted/10 p-4 rounded-xl w-max">
+                <MapPin className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">{gotra.regions.join(", ")}</span>
+              </div>
+            )}
 
             {/* Villages Section */}
             {associatedVillages.length > 0 && (
-              <div className="mt-12">
+              <div className="mt-8">
                 <h3 className="text-2xl font-display font-bold text-foreground mb-6 flex items-center">
                   <Map className="w-6 h-6 mr-3 text-primary" /> Notable Villages
                 </h3>
@@ -62,14 +61,22 @@ export default function GotraDetailPage() {
                         </span>
                       </Link>
                     ) : (
-                      <span key={vName} className="px-4 py-2 bg-muted/50 border border-border text-muted-foreground font-medium rounded-full italic">
+                      <span key={vName} className="px-4 py-2 bg-muted/50 border border-border text-muted-foreground font-medium rounded-full">
                         {vName}
                       </span>
                     );
                   })}
                 </div>
+
+                {/* Disclaimer — only shows when both states AND villages exist */}
+                {gotra.regions.length > 0 && (
+                  <p className="text-xs text-muted-foreground mt-4 italic">
+                    * States and villages are independently documented and may not correspond to each other. Data is actively being expanded.
+                  </p>
+                )}
               </div>
             )}
+
           </div>
         </div>
 
