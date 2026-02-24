@@ -4,11 +4,12 @@ export interface Gotra {
   nameHi: string;
   regions: string[];
   description: string;
+  villages?: string[];
 }
 
 export const gotras: Gotra[] = [
-  { id: 1, name: "Kashyap", nameHi: "कश्यप", regions: ["UP", "Bihar", "Haryana"], description: "One of the oldest gotras, descended from the sage Kashyapa. Widely distributed across northern India." },
-  { id: 2, name: "Atri", nameHi: "अत्री", regions: ["UP", "Rajasthan"], description: "Descended from Maharishi Atri, one of the Saptarishis. Known for their scholarly tradition." },
+  { id: 1, name: "Kashyap", nameHi: "कश्यप", regions: ["UP", "Bihar", "Haryana"], description: "One of the oldest gotras, descended from the sage Kashyapa. Widely distributed across northern India.", villages: ["Vrindavan", "Saifai"] },
+  { id: 2, name: "Atri", nameHi: "अत्री", regions: ["UP", "Rajasthan"], description: "Descended from Maharishi Atri, one of the Saptarishis. Known for their scholarly tradition.", villages: ["Mathura"] },
   { id: 3, name: "Bharadwaj", nameHi: "भारद्वाज", regions: ["UP", "MP", "Maharashtra"], description: "Lineage of Rishi Bharadwaj, the great Vedic scholar and warrior-sage." },
   { id: 4, name: "Gautam", nameHi: "गौतम", regions: ["Bihar", "UP"], description: "From the lineage of sage Gautama. Prominent in eastern UP and Bihar." },
   { id: 5, name: "Vashishtha", nameHi: "वशिष्ठ", regions: ["Haryana", "Rajasthan"], description: "One of the most revered gotras, tracing to Maharishi Vashishtha, royal priest of the Ikshvaku dynasty." },
