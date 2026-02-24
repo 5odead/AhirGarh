@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, FileText, User, MapPin, Shield } from 'lucide-react';
+import { Search, X, FileText, MapPin, Shield } from 'lucide-react';
 import { useLocation } from 'wouter';
 import Fuse from 'fuse.js';
 import { useSearch } from '@/context/SearchContext';
 
 import { articles } from '@/data/articles';
 import { gotras } from '@/data/gotras';
-import { personalities } from '@/data/personalities';
 import { villages } from '@/data/villages';
 
 export default function SearchModal() {
@@ -20,7 +19,6 @@ export default function SearchModal() {
   const combinedData = [
     ...articles.map(a => ({ type: 'Article', id: a.slug, title: a.title, desc: a.excerpt, url: `/wiki/${a.slug}`, icon: FileText })),
     ...gotras.map(g => ({ type: 'Gotra', id: g.id.toString(), title: g.name, desc: g.description, url: `/gotras/${g.id}`, icon: Shield })),
-    ...personalities.map(p => ({ type: 'Personality', id: p.id.toString(), title: p.name, desc: p.bio, url: `/personalities/${p.id}`, icon: User })),
     ...villages.map(v => ({ type: 'Village', id: v.id.toString(), title: v.name, desc: v.district, url: `/villages/${v.id}`, icon: MapPin }))
   ];
 
@@ -71,7 +69,7 @@ export default function SearchModal() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search Ahirgarh... articles, gotras, personalities"
+                placeholder="Search Ahirgarh... articles, gotras, villages"
                 className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground text-lg"
               />
               <button onClick={closeSearch} className="p-1 rounded-md hover:bg-muted text-muted-foreground">
