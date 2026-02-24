@@ -17,7 +17,6 @@ export default function Navbar() {
     { name: t.nav.home, path: '/' },
     { name: t.nav.wiki, path: '/wiki' },
     { name: t.nav.gotras, path: '/gotras' },
-    { name: t.nav.personalities, path: '/personalities' },
     { name: t.nav.villages, path: '/villages' },
     { name: t.nav.history, path: '/history' },
     { name: t.nav.culture, path: '/culture' },

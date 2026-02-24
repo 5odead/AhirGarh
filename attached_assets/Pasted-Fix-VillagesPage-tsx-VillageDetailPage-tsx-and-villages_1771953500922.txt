@@ -1,0 +1,100 @@
+Fix VillagesPage.tsx, VillageDetailPage.tsx and villages.ts completely.
+
+## 1. UPDATE villages.ts INTERFACE
+Remove image field completely. Use this interface:
+
+export interface Village {
+  id: number;
+  name: string;
+  state: string;
+  district: string;
+  notablePeople: string[];
+  history: string;
+}
+
+Remove image from all existing village entries too.
+
+## 2. VILLAGES PAGE — COMPACT ALPHABETICAL SYSTEM
+Replace the entire current card grid with:
+
+HEADER:
+- Page title "Villages"
+- Dynamic stats: "Documenting X Villages across Y States" where both numbers are calculated from villages array automatically
+
+DISCLAIMER BOX (below header, same glass style as gotras disclaimer):
+- Icon + "A Note on Village Names"
+- Text: "Village names may vary in spelling across sources and regions. If you cannot find your village, try searching by district name or nearby village. This database is actively growing. To add a village, contact us on WhatsApp." 
+- WhatsApp link at end
+
+SEARCH BAR:
+- Fuse.js search across name, state, district fields
+- When search is active: hide alphabetical sections, show compact results with "X results found for 'query'" above
+
+STATE FILTER DROPDOWN:
+- Keep existing All States dropdown
+- When filter active: hide alpha sections, show filtered compact list
+
+ALPHABETICAL INDEX BAR (sticky, below search):
+- Single row of letter buttons A-Z
+- Clicking scrolls smoothly to that letter section
+- Active letter highlighted in saffron
+- Letters with no villages: greyed out, non-clickable
+- On mobile: horizontally scrollable
+
+ALPHABETICAL SECTIONS:
+- Group all villages by first letter
+- Large letter heading as section divider with saffron underline
+- Each village is a compact row:
+  - Village name (bold)
+  - District name (muted, smaller)
+  - State pill (tiny, right side)
+  - Entire row clickable → /villages/:id
+  - Row height max 48px
+  - Alternating subtle row backgrounds
+  - Hover: saffron left border + slight background highlight
+
+VIEW TOGGLE (top right):
+- List view (default, compact) 
+- Grid view (simple cards, no images)
+- Save preference in localStorage
+
+## 3. VILLAGE DETAIL PAGE
+Remove ALL images completely.
+
+Show:
+- Village name as large heading
+- State + District as subtitle
+- History paragraph (if exists)
+- Notable People list (if exists)
+
+GOTRAS FOUND HERE SECTION:
+- Import gotras from '@/data/gotras'
+- Filter: gotras.filter(g => g.villages.includes(village.name))
+- Display matching gotras as clickable saffron pills → each navigates to /gotras/:id
+- If no matches: show "No gotra data linked yet. Help us expand →" with WhatsApp link
+
+BACK BUTTON:
+- "← Back to Villages" navigates to /villages
+
+## 4. GOTRA DETAIL PAGE — VILLAGE LINKS
+In GotraDetailPage.tsx, update the villages display:
+- Import villages from '@/data/villages'
+- For each name in gotra.villages array:
+  - Check: villages.find(v => v.name === villageName)
+  - If found → render as clickable link → /villages/:id
+  - If not found in villages.ts → render as plain text with muted color
+- This creates automatic two-way linking
+
+## 5. DATA MANAGEMENT RULES
+To add a new village: add one entry to villages.ts
+To add a new gotra: add one entry to gotras.ts  
+To link a gotra to a village: add village name string to that gotra's villages[] array
+The two-way display is fully automatic — no other files to touch ever.
+
+## CRITICAL RULES:
+- No images anywhere in villages section
+- No duplicate district showing
+- All routes must still work
+- Mobile responsive
+- Dark mode must work on every component
+- Keep all existing gotra page functionality intact

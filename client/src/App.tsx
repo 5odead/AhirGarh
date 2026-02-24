@@ -22,8 +22,6 @@ import WikiPage from "@/pages/WikiPage";
 import ArticlePage from "@/pages/ArticlePage";
 import GotrasPage from "@/pages/GotrasPage";
 import GotraDetailPage from "@/pages/GotraDetailPage";
-import PersonalitiesPage from "@/pages/PersonalitiesPage";
-import PersonalityDetailPage from "@/pages/PersonalityDetailPage";
 import VillagesPage from "@/pages/VillagesPage";
 import VillageDetailPage from "@/pages/VillageDetailPage";
 import HistoryPage from "@/pages/HistoryPage";
@@ -41,8 +39,6 @@ function Router() {
         <Route path="/wiki/:slug" component={ArticlePage}/>
         <Route path="/gotras" component={GotrasPage}/>
         <Route path="/gotras/:id" component={GotraDetailPage}/>
-        <Route path="/personalities" component={PersonalitiesPage}/>
-        <Route path="/personalities/:id" component={PersonalityDetailPage}/>
         <Route path="/villages" component={VillagesPage}/>
         <Route path="/villages/:id" component={VillageDetailPage}/>
         <Route path="/history" component={HistoryPage}/>
