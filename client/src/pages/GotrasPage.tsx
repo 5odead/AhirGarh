@@ -271,7 +271,7 @@ function GridCard({ gotra }: { gotra: typeof gotras[0] }) {
           
           <div className="flex flex-wrap gap-2 relative z-10">
             {gotra.regions.map(r => (
-              <span key={r} className="text-xs px-2 py-1 bg-background border border-border rounded text-muted-foreground">{r}</span>
+              <span key={r} className="text-xs px-2 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary font-medium">{r}</span>
             ))}
           </div>
         </div>
