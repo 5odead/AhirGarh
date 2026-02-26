@@ -193,5 +193,5 @@ export const gotras: Gotra[] = [
   { id: 184, name: "Thothwal", nameHi: "थोथवाल", regions: ["Haryana"], villages: [] },
   { id: 185, name: "Balriya", nameHi: "बलरिया", regions: ["Haryana"], villages: [] },
   { id: 186, name: "Mehta", nameHi: "मेहता", regions: ["UP"], villages: ["Baghpat"] },
- { id: 186, name: "Maraiya", nameHi: "**मराइया**", regions: ["MP"], villages: [] },
+ { id: 186, name: "Maraiya", nameHi: "मराइया", regions: ["MP"], villages: [] },
 ];
