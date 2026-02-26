@@ -1,0 +1,279 @@
+Do these 3 things:
+
+## 1. REMOVE NOTICE BOARD COMPLETELY
+- Delete client/src/pages/NoticeBoardPage.tsx
+- Remove /notice-board route from App.tsx
+- Remove "Notice Board" link from Navbar.tsx
+- Delete client/src/data/notices.ts if it exists
+
+---
+
+## 2. ADD PERSONALITIES SECTION
+
+Create:
+- client/src/data/personalities.ts
+- client/src/pages/PersonalitiesPage.tsx
+- client/src/pages/PersonalityDetailPage.tsx
+
+Add /personalities and /personalities/:id routes in App.tsx
+Add "Personalities" link in Navbar.tsx between Wiki and Villages
+
+### DATA STRUCTURE (personalities.ts)
+This file is the ONLY place to add, edit or remove personalities.
+To add a new personality: add one object to the array.
+To edit: change the fields directly.
+To remove: delete the object.
+No other files need to be touched.
+
+export interface Personality {
+  id: number;
+  name: string;        // English name
+  nameHi: string;      // Hindi name
+  category: string;    // "Politicians" | "Military" | "Sports" | "Arts" | "Spiritual" | "Business"
+  born: string;        // "22 November 1939" or "" if unknown
+  died: string;        // "10 October 2022" or "" if alive or unknown
+  birthPlace: string;  // "Saifai, Etawah, Uttar Pradesh" or "" if unknown
+  knownFor: string;    // One line description
+  photo: string;       // Image URL or "" for auto initials avatar
+  bio: string;         // 2-3 paragraph plain text biography
+  achievements: string[]; // Array of achievement strings
+}
+
+export const personalities: Personality[] = [
+  {
+    id: 1,
+    name: "Mulayam Singh Yadav",
+    nameHi: "मुलायम सिंह यादव",
+    category: "Politicians",
+    born: "22 November 1939",
+    died: "10 October 2022",
+    birthPlace: "Saifai, Etawah, Uttar Pradesh",
+    knownFor: "Founder of Samajwadi Party",
+    photo: "",
+    bio: "Mulayam Singh Yadav was an Indian politician who served as the Chief Minister of Uttar Pradesh three times and as the Minister of Defence of India. He was the founder of the Samajwadi Party, one of the major political parties in India. Born into a farming family in Saifai village of Etawah district, he rose through the ranks of socialist politics to become one of the most influential politicians in north India.",
+    achievements: [
+      "Founded Samajwadi Party in 1992",
+      "Chief Minister of Uttar Pradesh — 1989, 1993, 2003",
+      "Minister of Defence of India — 1996",
+      "Member of Parliament for over 3 decades"
+    ]
+  },
+  {
+    id: 2,
+    name: "Akhilesh Yadav",
+    nameHi: "अखिलेश यादव",
+    category: "Politicians",
+    born: "1 July 1973",
+    died: "",
+    birthPlace: "Saifai, Etawah, Uttar Pradesh",
+    knownFor: "Chief Minister of Uttar Pradesh",
+    photo: "",
+    bio: "Akhilesh Yadav is an Indian politician serving as the President of the Samajwadi Party. He served as the Chief Minister of Uttar Pradesh from 2012 to 2017, becoming the youngest person to hold that office. He is the son of Samajwadi Party founder Mulayam Singh Yadav.",
+    achievements: [
+      "Chief Minister of Uttar Pradesh 2012-2017",
+      "Youngest CM in UP history",
+      "President of Samajwadi Party",
+      "Developed Agra-Lucknow Expressway and Lucknow Metro"
+    ]
+  },
+  {
+    id: 3,
+    name: "Lalu Prasad Yadav",
+    nameHi: "लालू प्रसाद यादव",
+    category: "Politicians",
+    born: "11 June 1948",
+    died: "",
+    birthPlace: "Phulwaria, Gopalganj, Bihar",
+    knownFor: "Founder of Rashtriya Janata Dal",
+    photo: "",
+    bio: "Lalu Prasad Yadav is an Indian politician and the founder of the Rashtriya Janata Dal party. He served as the Chief Minister of Bihar and as the Union Railway Minister of India. He is one of the most prominent OBC leaders in Indian politics.",
+    achievements: [
+      "Chief Minister of Bihar — 1990 to 1997",
+      "Union Railway Minister of India — 2004 to 2009",
+      "Founded Rashtriya Janata Dal in 1997",
+      "Known for turnaround of Indian Railways"
+    ]
+  }
+];
+
+### PERSONALITIES PAGE (/personalities)
+
+HEADER:
+- Title: "Personalities"
+- Subtitle: "Documenting notable Ahirs and Yadavs who shaped history"
+- Dynamic stat: "X Personalities Documented" — uses personalities.length
+
+FILTER TABS (pill style, saffron when active):
+All | Politicians | Military | Sports | Arts | Spiritual | Business
+
+SEARCH:
+- Fuse.js search across name, knownFor, birthPlace, bio
+- Live filtering as user types
+- When search active: hide filter tabs, show "X results for 'query'"
+
+GRID:
+- 3 col desktop, 2 tablet, 1 mobile
+- Each card shows:
+  - PHOTO: if photo !== "" show image, object-cover, 200px height, rounded top
+  - AVATAR: if photo === "" show large circle with saffron bg, white text initials
+    Initials = first letter of first word + first letter of last word of full name
+    "Mulayam Singh Yadav" → "MY"
+    "Lalu Prasad Yadav" → "LY"
+  - Name bold
+  - nameHi smaller muted
+  - category as saffron pill badge
+  - birthPlace with 📍 if not ""
+  - knownFor italic small muted
+  - Entire card clickable → /personalities/:id
+  - Hover: lift shadow + saffron border glow
+
+### PERSONALITY DETAIL PAGE (/personalities/:id)
+
+- Framer Motion fade in
+- useEffect scroll to top
+- If not found → centered "Not Found" + "← Back" button
+
+LAYOUT:
+Back button: "← Back to Personalities" → /personalities
+
+Hero section two column desktop, stacked mobile:
+  LEFT:
+  - photo if not "" → large rounded-2xl image
+  - if photo "" → large initials circle saffron bg white text same dimensions
+
+  RIGHT (info table):
+  Only render rows where value is not "":
+  - Born: {born}
+  - Died: {died}
+  - Birth Place: {birthPlace}
+  - Known For: {knownFor}
+  - Category: {category} as badge
+
+BIOGRAPHY section:
+- "Biography" heading Playfair Display font-display
+- bio text as plain <p> tags
+- Good line height, readable
+- ABSOLUTELY NO <a> tags or Link components inside bio
+- ABSOLUTELY NO hyperlinks anywhere on this page
+
+ACHIEVEMENTS section (only render if achievements.length > 0):
+- "Achievements" heading
+- Each achievement as plain <li> with saffron bullet or checkmark icon
+- Plain text only — no hyperlinks
+
+RELATED section:
+- "More Personalities" heading
+- Filter personalities by same category, exclude current, show max 3
+- Same card style as grid
+- Each navigates to /personalities/:id
+
+CRITICAL RULES:
+- Zero hyperlinks on detail page — no <a>, no <Link> inside content
+- No gotra field anywhere
+- Any field that is "" must be completely hidden — no empty rows
+- Initials logic: name.split(' ') → first[0] + last[0] toUpperCase
+- Dark mode compatible
+- Mobile responsive
+
+---
+
+## 3. ADD OBC & RESERVATIONS PAGE
+
+Create: client/src/pages/ReservationsPage.tsx
+Add route /reservations in App.tsx
+Add "Reservations" in Navbar.tsx after Personalities
+
+### EASY EDITING SYSTEM
+At the top of ReservationsPage.tsx create a single content object:
+
+const reservationContent = {
+  title: "OBC & Reservations",
+  titleHi: "ओबीसी और आरक्षण",
+  subtitle: "A complete guide to reservation rights for the Yadav and Ahir community",
+  lastUpdated: "February 2026",
+  sections: [
+    {
+      id: "what-is-obc",
+      heading: "What is OBC?",
+      content: `Other Backward Classes (OBC) is a classification used by the Government of India to identify communities that are socially and educationally disadvantaged. The OBC category was established following the recommendations of the Mandal Commission in 1980 and implemented in 1990. The central government maintains a Central OBC List while each state maintains its own State OBC List. Being on the central list gives reservations in central government jobs and central universities while state list gives reservations in state government jobs and state institutions.`
+    },
+    {
+      id: "yadav-status",
+      heading: "Are Yadavs and Ahirs OBC?",
+      content: `Yes. The Yadav community, also known as Ahir, is listed as OBC in the Central OBC List maintained by the National Commission for Backward Classes (NCBC). This means Yadavs are eligible for 27% OBC reservation in central government jobs, central universities, IITs, IIMs, NITs and all central institutions across India. Additionally Yadavs are listed in the state OBC lists of Uttar Pradesh, Bihar, Haryana, Rajasthan, Madhya Pradesh, Maharashtra, Gujarat, Delhi and most other states — giving them state-level reservation benefits as well.`
+    },
+    {
+      id: "percentages",
+      heading: "Reservation Percentages",
+      content: `In central government jobs and central educational institutions, OBC reservation is 27% of total seats and posts. This applies to all central government departments, PSUs, IITs, IIMs, NITs, AIIMS, central universities and all institutions funded by the central government.\n\nState-wise OBC reservation percentages:\n\nUttar Pradesh — 27%\nBihar — varies by sub-category (EBC + BC combined)\nHaryana — 27%\nRajasthan — 21%\nMadhya Pradesh — 14%\nMaharashtra — 19%\nDelhi — 27% (follows central rules)`
+    },
+    {
+      id: "creamy-layer",
+      heading: "What is Creamy Layer?",
+      content: `Creamy Layer refers to the relatively advanced and well-off members within OBC communities who are excluded from OBC reservation benefits. If your family income exceeds the prescribed limit you fall under Creamy Layer and cannot avail OBC reservation.\n\nThe current Creamy Layer income limit is Rs 8 lakh per annum (verify latest figure from official sources before applying). This limit considers income from salary and agriculture — not income from property.\n\nChildren of IAS, IPS and Group A officers are automatically considered Creamy Layer regardless of income.`
+    },
+    {
+      id: "certificate",
+      heading: "How to Get Your OBC Certificate",
+      content: `Documents Required:\n— Aadhaar Card\n— Ration Card or domicile proof\n— Income Certificate of parents\n— Caste proof such as father or grandfather documents\n— Passport size photos\n— School leaving certificate\n\nWhere to Apply: Visit your local Tehsil office or SDM (Sub Divisional Magistrate) office. In most states you can also apply online through your state's e-district portal.\n\nCentral vs State Certificate: For central government jobs you need a Central OBC Certificate specifically. A state OBC certificate alone is not sufficient for central reservations. Request a certificate valid for central government purposes when applying.`
+    },
+    {
+      id: "mandal",
+      heading: "The Mandal Commission",
+      content: `The Mandal Commission, officially the Second Backward Classes Commission, was established in 1979 under the chairmanship of B.P. Mandal. It submitted its report in 1980 recommending 27% reservation for OBC communities in central government jobs and educational institutions.\n\nThe recommendations were implemented in 1990 by Prime Minister V.P. Singh, triggering massive protests across India but fundamentally transforming the social and political landscape.\n\nFor the Yadav community the Mandal Commission was a watershed moment — it gave constitutional backing to social equality and led directly to the rise of Yadav political power in north India through leaders like Mulayam Singh Yadav and Lalu Prasad Yadav.`
+    },
+    {
+      id: "important-note",
+      heading: "Important Note",
+      content: `Reservation policies change over time. The information on this page is for general guidance only. Always verify current rules from official government sources — ncbc.nic.in for central OBC list and your state government's official website for state-specific rules. For certificate applications always consult your local Tehsil office.`
+    }
+  ],
+  disclaimer: "This page is for informational purposes only. Ahirgarh does not provide legal advice. Always verify information from official government sources before making decisions."
+}
+
+### TO ADD A NEW SECTION:
+Just add a new object to the sections array with id, heading and content.
+The page renders all sections automatically — no other changes needed.
+
+### TO EDIT CONTENT:
+Just change the text inside any content string.
+
+### TO REMOVE A SECTION:
+Delete that object from the sections array.
+
+### PAGE LAYOUT
+Build this page EXACTLY like ArticlePage.tsx — identical layout and styling:
+- Same Playfair Display headings
+- Same body text style and line height
+- Same reading progress bar at top of screen
+- Same sticky table of contents sidebar on desktop showing all section headings
+  Clicking a heading smoothly scrolls to that section
+  Active section highlighted in saffron
+- Same max-width centered content area
+- Same section dividers
+- Back button at top: "← Back"
+- "Last Updated: {lastUpdated}" shown below title in muted text
+- Disclaimer box at very bottom — styled with border and muted background, italic text
+- Dark mode compatible
+- Mobile responsive — on mobile TOC becomes a dropdown at top instead of sidebar
+
+---
+
+## NAVBAR FINAL ORDER:
+Home | Wiki | Personalities | Villages | Gotras | History | Culture | Reservations | About
+
+---
+
+## FINAL CHECKLIST:
+- Notice Board removed from navbar, routes and all files
+- /personalities works with filter tabs and search
+- /personalities/:id works with no hyperlinks anywhere in content
+- /reservations works exactly like an article page
+- reservationContent object at top of file is the only place to edit content
+- personalities.ts is the only place to add/edit/remove personalities
+- All routes added in App.tsx
+- Navbar updated correctly
+- Dark mode on all new pages
+- Mobile responsive on all new pages
+- No broken links anywhere
+- No console errors

@@ -20,13 +20,15 @@ import BackToTop from "@/components/ui/BackToTop";
 import HomePage from "@/pages/HomePage";
 import WikiPage from "@/pages/WikiPage";
 import ArticlePage from "@/pages/ArticlePage";
-import GotrasPage from "@/pages/GotrasPage";
-import GotraDetailPage from "@/pages/GotraDetailPage";
+import PersonalitiesPage from "@/pages/PersonalitiesPage";
+import PersonalityDetailPage from "@/pages/PersonalityDetailPage";
 import VillagesPage from "@/pages/VillagesPage";
 import VillageDetailPage from "@/pages/VillageDetailPage";
+import GotrasPage from "@/pages/GotrasPage";
+import GotraDetailPage from "@/pages/GotraDetailPage";
 import HistoryPage from "@/pages/HistoryPage";
 import CulturePage from "@/pages/CulturePage";
-import NoticeBoardPage from "@/pages/NoticeBoardPage";
+import ReservationsPage from "@/pages/ReservationsPage";
 import AboutPage from "@/pages/AboutPage";
 import NotFound from "@/pages/not-found";
 
@@ -37,13 +39,15 @@ function Router() {
         <Route path="/" component={HomePage}/>
         <Route path="/wiki" component={WikiPage}/>
         <Route path="/wiki/:slug" component={ArticlePage}/>
-        <Route path="/gotras" component={GotrasPage}/>
-        <Route path="/gotras/:id" component={GotraDetailPage}/>
+        <Route path="/personalities" component={PersonalitiesPage}/>
+        <Route path="/personalities/:id" component={PersonalityDetailPage}/>
         <Route path="/villages" component={VillagesPage}/>
         <Route path="/villages/:id" component={VillageDetailPage}/>
+        <Route path="/gotras" component={GotrasPage}/>
+        <Route path="/gotras/:id" component={GotraDetailPage}/>
         <Route path="/history" component={HistoryPage}/>
         <Route path="/culture" component={CulturePage}/>
-        <Route path="/notice-board" component={NoticeBoardPage}/>
+        <Route path="/reservations" component={ReservationsPage}/>
         <Route path="/about" component={AboutPage}/>
         <Route component={NotFound} />
       </Switch>

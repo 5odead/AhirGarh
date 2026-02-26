@@ -16,11 +16,12 @@ export default function Navbar() {
   const navLinks = [
     { name: t.nav.home, path: '/' },
     { name: t.nav.wiki, path: '/wiki' },
-    { name: t.nav.gotras, path: '/gotras' },
+    { name: t.nav.personalities, path: '/personalities' },
     { name: t.nav.villages, path: '/villages' },
+    { name: t.nav.gotras, path: '/gotras' },
     { name: t.nav.history, path: '/history' },
     { name: t.nav.culture, path: '/culture' },
-    { name: t.nav.noticeBoard, path: '/notice-board' },
+    { name: t.nav.reservations, path: '/reservations' },
     { name: t.nav.about, path: '/about' },
   ];
 
