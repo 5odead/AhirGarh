@@ -105,7 +105,7 @@ export default function VillagesPage() {
         </div>
 
         {/* Controls */}
-        <div className="glass p-6 rounded-3xl mb-4 shadow-md flex flex-col gap-4 sticky top-20 z-40 bg-background/80 backdrop-blur-md">
+        <div className="glass p-6 rounded-3xl mb-4 shadow-md flex flex-col gap-4 md:sticky md:top-20 z-40 bg-background/80 backdrop-blur-md">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
@@ -145,7 +145,7 @@ export default function VillagesPage() {
           </div>
 
           {!search && (
-            <div className="flex flex-wrap justify-center gap-1 border-t border-border pt-4 overflow-x-auto no-scrollbar">
+            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-1 border-t border-border pt-4 overflow-x-auto md:overflow-visible no-scrollbar -mx-2 px-2 md:mx-0 md:px-0">
               {alphabet.map(letter => {
                 const hasVillages = availableLetters.has(letter);
                 return (
@@ -153,10 +153,11 @@ export default function VillagesPage() {
                     key={letter}
                     disabled={!hasVillages}
                     onClick={() => scrollToSection(letter)}
-                    className={`w-7 h-7 flex shrink-0 items-center justify-center rounded text-xs font-bold transition-all
+                    className={`w-7 h-7 md:w-7 md:h-7 shrink-0 flex items-center justify-center rounded text-[12px] md:text-xs font-bold transition-all
                       ${hasVillages 
                         ? 'text-foreground hover:bg-primary hover:text-white cursor-pointer' 
                         : 'text-muted-foreground/30 cursor-not-allowed'}`}
+                    style={{ minWidth: '28px', minHeight: '28px' }}
                   >
                     {letter}
                   </button>

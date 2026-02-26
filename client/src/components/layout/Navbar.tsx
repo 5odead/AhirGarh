@@ -98,45 +98,45 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex flex-col"
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[100] bg-[#0D0A07]/95 backdrop-blur-md flex flex-col items-center justify-center"
           >
-            <div className="flex justify-between items-center p-6 border-b border-border">
-              <span className="font-display text-2xl font-bold text-gradient">Ahirgarh</span>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-foreground">
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+            <button 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              className="absolute top-6 right-6 p-2 text-white hover:text-primary transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
             
-            <div className="flex-grow overflow-y-auto px-6 py-8">
-              <motion.div 
-                variants={{
-                  container: { transition: { staggerChildren: 0.05 } }
-                }}
-                initial="initial" animate="animate" className="flex flex-col space-y-4"
-              >
-                {navLinks.map((link) => (
-                  <motion.div key={link.path} variants={{ initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 }}}>
-                    <Link href={link.path}>
-                      <div onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-foreground py-2 border-b border-border/50">
-                        {link.name}
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.div>
+            <nav className="flex flex-col items-center justify-center w-full px-6">
+              {navLinks.map((link) => {
+                const isActive = location === link.path || (link.path !== '/' && location.startsWith(link.path));
+                return (
+                  <Link key={link.path} href={link.path}>
+                    <div 
+                      onClick={() => setIsMobileMenuOpen(false)} 
+                      className={`w-full text-center py-5 text-[24px] font-bold transition-colors cursor-pointer ${
+                        isActive ? 'text-primary' : 'text-white hover:text-primary'
+                      }`}
+                    >
+                      {link.name}
+                    </div>
+                  </Link>
+                );
+              })}
               
-              <div className="mt-8 flex space-x-4">
-                <button onClick={toggleLanguage} className="px-4 py-2 text-sm font-semibold bg-primary text-white rounded-full">
-                   Toggle Language ({lang === 'en' ? 'Hindi' : 'English'})
+              <div className="mt-10 flex items-center space-x-6">
+                <button onClick={toggleLanguage} className="text-white hover:text-primary transition-colors font-bold">
+                  {lang === 'en' ? 'हिन्दी' : 'English'}
                 </button>
-                <button onClick={toggleTheme} className="p-2 bg-black/10 dark:bg-white/10 rounded-full text-foreground">
-                  {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                <button onClick={toggleTheme} className="p-3 bg-white/10 rounded-full text-white hover:text-primary transition-colors">
+                  {theme === 'light' ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
                 </button>
               </div>
-            </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
