@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Search, Sun, Moon, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +12,17 @@ export default function Navbar() {
   const { lang, toggleLanguage, t } = useLanguage();
   const { openSearch } = useSearch();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { name: t.nav.home, path: '/' },
@@ -98,27 +109,38 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[100] bg-[#0D0A07]/95 backdrop-blur-md flex flex-col items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[9999] bg-[#0D0A07] flex flex-col"
           >
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)} 
-              className="absolute top-6 right-6 p-2 text-white hover:text-primary transition-colors"
-            >
-              <X className="w-8 h-8" />
-            </button>
+            {/* Top Bar */}
+            <div className="flex justify-between items-center h-20 px-4 sm:px-6">
+              <div className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-8 h-8 text-primary" strokeWidth="2">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                </svg>
+                <span className="font-display text-2xl font-bold text-white">Ahirgarh</span>
+              </div>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="p-2 text-white hover:text-primary transition-colors"
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </div>
             
-            <nav className="flex flex-col items-center justify-center w-full px-6">
+            {/* Nav Links */}
+            <nav className="flex-1 flex flex-col items-center justify-center gap-2 w-full px-6">
               {navLinks.map((link) => {
                 const isActive = location === link.path || (link.path !== '/' && location.startsWith(link.path));
                 return (
                   <Link key={link.path} href={link.path}>
                     <div 
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className={`w-full text-center py-5 text-[24px] font-bold transition-colors cursor-pointer ${
+                      className={`w-full text-center py-3.5 text-[22px] font-bold transition-colors cursor-pointer ${
                         isActive ? 'text-primary' : 'text-white hover:text-primary'
                       }`}
                     >
@@ -128,15 +150,20 @@ export default function Navbar() {
                 );
               })}
               
-              <div className="mt-10 flex items-center space-x-6">
+              <div className="mt-6 flex items-center gap-6">
                 <button onClick={toggleLanguage} className="text-white hover:text-primary transition-colors font-bold">
                   {lang === 'en' ? 'हिन्दी' : 'English'}
                 </button>
-                <button onClick={toggleTheme} className="p-3 bg-white/10 rounded-full text-white hover:text-primary transition-colors">
-                  {theme === 'light' ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
+                <button onClick={toggleTheme} className="p-2 bg-white/10 rounded-full text-white hover:text-primary transition-colors">
+                  {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
                 </button>
               </div>
             </nav>
+
+            {/* Bottom */}
+            <div className="pb-8 text-center">
+              <span className="text-xs text-muted-foreground/50 font-medium">ahirgarh.vercel.app</span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
