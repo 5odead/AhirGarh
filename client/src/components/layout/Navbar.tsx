@@ -98,8 +98,8 @@ export default function Navbar() {
             <button onClick={openSearch} className="p-2 text-muted-foreground hover:text-primary">
               <Search className="w-5 h-5" />
             </button>
-            <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 text-foreground">
-              <Menu className="w-6 h-6" />
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-foreground">
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -113,36 +113,35 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[9999] bg-[#0D0A07] flex flex-col"
+            style={{
+              backgroundColor: '#0D0A07',
+              position: 'fixed',
+              top: '80px', // Matches navbar height (h-20)
+              left: 0,
+              width: '100%',
+              height: 'calc(100vh - 80px)',
+              zIndex: 9999,
+              overflowY: 'auto',
+              borderTop: '1px solid #E8500A'
+            }}
           >
-            {/* Top Bar */}
-            <div className="flex justify-between items-center h-20 px-4 sm:px-6">
-              <div className="flex items-center gap-2">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-8 h-8 text-primary" strokeWidth="2">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
-                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                </svg>
-                <span className="font-display text-2xl font-bold text-white">Ahirgarh</span>
-              </div>
-              <button 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="p-2 text-white hover:text-primary transition-colors"
-              >
-                <X className="w-8 h-8" />
-              </button>
-            </div>
-            
-            {/* Nav Links */}
-            <nav className="flex-1 flex flex-col items-center justify-center gap-2 w-full px-6">
+            <nav style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
               {navLinks.map((link) => {
                 const isActive = location === link.path || (link.path !== '/' && location.startsWith(link.path));
                 return (
                   <Link key={link.path} href={link.path}>
                     <div 
                       onClick={() => setIsMobileMenuOpen(false)} 
-                      className={`w-full text-center py-3.5 text-[22px] font-bold transition-colors cursor-pointer ${
-                        isActive ? 'text-primary' : 'text-white hover:text-primary'
-                      }`}
+                      style={{
+                        display: 'block',
+                        padding: '20px 24px',
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                        color: isActive ? '#E8500A' : 'white',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
+                        cursor: 'pointer',
+                        transition: 'color 0.2s'
+                      }}
                     >
                       {link.name}
                     </div>
@@ -150,20 +149,30 @@ export default function Navbar() {
                 );
               })}
               
-              <div className="mt-6 flex items-center gap-6">
-                <button onClick={toggleLanguage} className="text-white hover:text-primary transition-colors font-bold">
+              <div style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '24px' }}>
+                <button 
+                  onClick={toggleLanguage} 
+                  style={{ color: 'white', fontWeight: 'bold', fontSize: '16px' }}
+                >
                   {lang === 'en' ? 'हिन्दी' : 'English'}
                 </button>
-                <button onClick={toggleTheme} className="p-2 bg-white/10 rounded-full text-white hover:text-primary transition-colors">
+                <button 
+                  onClick={toggleTheme} 
+                  style={{ 
+                    padding: '8px', 
+                    backgroundColor: 'rgba(255,255,255,0.1)', 
+                    borderRadius: '9999px', 
+                    color: 'white' 
+                  }}
+                >
                   {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
                 </button>
               </div>
-            </nav>
 
-            {/* Bottom */}
-            <div className="pb-8 text-center">
-              <span className="text-xs text-muted-foreground/50 font-medium">ahirgarh.vercel.app</span>
-            </div>
+              <div style={{ padding: '0 24px 32px', color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>
+                ahirgarh.vercel.app
+              </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
