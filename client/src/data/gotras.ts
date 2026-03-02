@@ -7,7 +7,7 @@ export interface Gotra {
 }
 
 export const gotras: Gotra[] = [
-  { id: 1, name: "Afriya", nameHi: "अफ्रिया", regions: ["Haryana"], villages: ["Tizara", "Rewari"] },
+  { id: 1, name: "Afriya", nameHi: "अफ्रिया", regions: ["Haryana"], villages: ["Tizara", "Rewari City"] },
   { id: 2, name: "Adukwaal", nameHi: "अडुकवाल", regions: [], villages: [] },
   { id: 3, name: "Ahalawat", nameHi: "अहलावत", regions: [], villages: [] },
   { id: 4, name: "Akshitala", nameHi: "अक्षिताला", regions: [], villages: [] },

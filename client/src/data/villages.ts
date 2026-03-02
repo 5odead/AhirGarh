@@ -23,7 +23,7 @@ export const villages: Village[] = [
   { id: 14, name: "Deoghar", state: "Jharkhand", district: "Deoghar", history: "Significant Yadav community in pilgrimage city with strong dairy traditions." },
   { id: 15, name: "Gorakhpur", state: "Uttar Pradesh", district: "Gorakhpur", history: "Major city with significant Yadav political presence." },
   { id: 16, name: "Nashik", state: "Maharashtra", district: "Nashik", history: "Significant Ahir/Yadav population with pastoral dairy traditions." },
-  { id: 17, name: "Rewari", state: "Haryana", district: "Rewari", history: "Core Ahirwal city with strong military and agricultural traditions." },
+  { id: 17, name: "Rewari City", state: "Haryana", district: "Rewari", history: "Core Ahirwal city with strong military and agricultural traditions." },
   { id: 18, name: "Ara", state: "Bihar", district: "Bhojpur", history: "Historic city with deep Yadav agricultural roots and political organizing." },
   { id: 19, name: "Jaipur", state: "Rajasthan", district: "Jaipur", history: "Rajasthan capital with significant Yadav merchant communities." },
   { id: 20, name: "Bhopal", state: "Madhya Pradesh", district: "Bhopal", history: "MP capital with large Yadav community in government service and dairy." },
