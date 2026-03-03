@@ -191,7 +191,7 @@ export const gotras: Gotra[] = [
   { id: 182, name: "Shisotiya", nameHi: "शिसोटिया", regions: ["Haryana", "UP"], villages: ["Manesar", "Moradabad"] },
   { id: 183, name: "Majraut / Majhrouth", nameHi: "मजरौत / मझरौथ", regions: ["UP", "Bihar"], villages: ["Khodre", "Moradabad"] },
   { id: 184, name: "Duddoliya", nameHi: "दुद्दोलिया", regions: ["Haryana"], villages: [] },
-  { id: 185, name: "Nooniwal", nameHi: "नूनीवाल", regions: ["UP", "Haryana"], villages: ["Meerut", "Narnaul"] },
+  { id: 185, name: "Nuniwal/Nooniwal", nameHi: "नूनीवाल", regions: ["UP", "Haryana"], villages: ["Meerut", "Narnaul", "Dundahera"] },
   { id: 186, name: "Chopra", nameHi: "चोपड़ा", regions: ["UP", "Haryana"], villages: ["Saharanpur", "Yamunanagar"] },
   { id: 187, name: "Rawat", nameHi: "रावत", regions: ["Haryana", "UP", "Rajasthan", "MP"], villages: ["Bharatpur", "Agra", "Etah", "Etawah", "Manipuri", "Auraiya"] },
   { id: 188, name: "Chabbariya", nameHi: "छब्बरिया", regions: [], villages: [] },
