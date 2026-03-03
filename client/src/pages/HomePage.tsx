@@ -70,9 +70,9 @@ function StatsBar() {
   const { t } = useLanguage();
   const [inView, setInView] = useState(false);
   const stats = [
-    { label: t.stats.articles, count: 500, icon: BookOpen },
-    { label: t.stats.gotras, count: 30, icon: Shield },
-    { label: t.stats.villages, count: 25, icon: MapPin },
+    { label: t.stats.articles, count: 5, icon: BookOpen },
+    { label: t.stats.gotras, count: 200, icon: Shield },
+    { label: t.stats.villages, count: 35, icon: MapPin },
     { label: t.stats.personalities, count: 15, icon: Users },
   ];
 
