@@ -8,6 +8,7 @@ import Fuse from 'fuse.js';
 export default function VillagesPage() {
   const [search, setSearch] = useState('');
   const [stateFilter, setStateFilter] = useState('All');
+  const [typeFilter, setTypeFilter] = useState('All');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>(() => {
     return (localStorage.getItem('villageViewMode') as 'list' | 'grid') || 'list';
   });
@@ -19,6 +20,7 @@ export default function VillagesPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const states = useMemo(() => ['All', ...Array.from(new Set(villages.map(v => v.state)))].sort(), []);
+  const types = ["All", "Village", "Town", "City", "District"];
 
   const fuse = useMemo(() => new Fuse(villages, { 
     keys: ['name', 'district', 'state'],
@@ -28,8 +30,9 @@ export default function VillagesPage() {
   const filteredVillages = useMemo(() => {
     let results = search ? fuse.search(search).map(r => r.item) : villages;
     if (stateFilter !== 'All') results = results.filter(v => v.state === stateFilter);
+    if (typeFilter !== 'All') results = results.filter(v => v.type === typeFilter);
     return results.sort((a, b) => a.name.localeCompare(b.name));
-  }, [search, stateFilter, fuse]);
+  }, [search, stateFilter, typeFilter, fuse]);
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   
@@ -61,24 +64,38 @@ export default function VillagesPage() {
     }
   };
 
-  const CompactRow = ({ village, index }: { village: typeof villages[0], index: number }) => (
-    <Link href={`/villages/${village.id}`}>
-      <div 
-        className={`flex items-center justify-between px-4 py-3 cursor-pointer transition-all border-l-4 border-transparent hover:border-primary hover:bg-primary/5 ${index % 2 === 0 ? 'bg-muted/5' : 'bg-transparent'}`}
-        style={{ height: '48px' }}
-      >
-        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 overflow-hidden">
-          <span className="font-bold text-foreground truncate">{village.name}</span>
-          <span className="text-xs text-muted-foreground truncate">{village.district}</span>
+  const CompactRow = ({ village, index }: { village: typeof villages[0], index: number }) => {
+    const typeColors: Record<string, string> = {
+      Village: "bg-muted/20 text-muted-foreground border-muted/30",
+      Town: "bg-blue-500/10 text-blue-500 border-blue-500/20",
+      City: "bg-green-500/10 text-green-500 border-green-500/20",
+      District: "bg-purple-500/10 text-purple-500 border-purple-500/20"
+    };
+
+    return (
+      <Link href={`/villages/${village.id}`}>
+        <div 
+          className={`flex items-center justify-between px-4 py-3 cursor-pointer transition-all border-l-4 border-transparent hover:border-primary hover:bg-primary/5 ${index % 2 === 0 ? 'bg-muted/5' : 'bg-transparent'}`}
+          style={{ height: '48px' }}
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 overflow-hidden">
+            <span className="font-bold text-foreground truncate">{village.name}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground truncate">{village.district}</span>
+              <span className={`text-[9px] px-1.5 py-0.5 border rounded-md font-bold uppercase tracking-tighter ${typeColors[village.type] || typeColors.Village}`}>
+                {village.type}
+              </span>
+            </div>
+          </div>
+          <div className="shrink-0">
+            <span className="text-[10px] px-2 py-0.5 bg-primary/10 border border-primary/20 rounded-full text-primary uppercase font-bold tracking-tighter">
+              {village.state}
+            </span>
+          </div>
         </div>
-        <div className="shrink-0">
-          <span className="text-[10px] px-2 py-0.5 bg-primary/10 border border-primary/20 rounded-full text-primary uppercase font-bold tracking-tighter">
-            {village.state}
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
+      </Link>
+    );
+  };
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-background pt-12 pb-24">
@@ -142,6 +159,22 @@ export default function VillagesPage() {
                 </button>
               </div>
             </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2 border-t border-border pt-4">
+            {types.map(t => (
+              <button
+                key={t}
+                onClick={() => setTypeFilter(t)}
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                  typeFilter === t 
+                    ? 'bg-primary text-white border-primary shadow-sm' 
+                    : 'bg-background text-muted-foreground border-border hover:border-primary/50 hover:text-foreground'
+                }`}
+              >
+                {t === 'All' ? 'All Types' : t + 's'}
+              </button>
+            ))}
           </div>
 
           {!search && (

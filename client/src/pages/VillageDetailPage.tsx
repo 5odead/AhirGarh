@@ -33,7 +33,12 @@ export default function VillageDetailPage() {
         <div className="glass rounded-3xl overflow-hidden shadow-xl border border-border">
           <div className="p-8 md:p-12">
             <div className="mb-8">
-              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-3">{village.name}</h1>
+              <div className="flex items-center gap-3 mb-3">
+                <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground">{village.name}</h1>
+                <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary rounded-full text-xs font-bold uppercase tracking-wider h-max mt-2">
+                  {village.type}
+                </span>
+              </div>
               <div className="flex items-center text-muted-foreground">
                 <MapPin className="w-5 h-5 mr-2 text-primary" />
                 <span className="text-xl font-medium">{village.district}, {village.state}</span>
