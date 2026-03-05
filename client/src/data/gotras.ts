@@ -210,6 +210,6 @@ export const gotras: Gotra[] = [
   { id: 201, name: "Kadiyan", nameHi: "कादियान", regions: ["Haryana"], villages: [] },
   { id: 202, name: "Bhidor / Bhiror", nameHi: "भिदोर / भिरोर", regions: ["UP"], villages: ["Agra", "Firozabad"] },
   { id: 203, name: "Gwalbansi", nameHi: "ग्वालबंशी", regions: ["UP"], villages: [] },
-  { id: 204, name: "Khola", nameHi: "खोला", regions: ["Haryana"], villages: ["Daruali"] },
+  { id: 204, name: "Khola", nameHi: "खोला", regions: ["Haryana"], villages: ["Daruali", "Musepur", "Fatehpuri"] },
   { id: 205, name: "Bacchas", nameHi: "बच्छस", regions: ["Haryana", "UP"], villages: [] },
 ];
