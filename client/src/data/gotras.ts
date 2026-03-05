@@ -25,7 +25,7 @@ export const gotras: Gotra[] = [
   { id: 16, name: "Bhankoliya", nameHi: "भानकोलिया", regions: [], villages: [] },
   { id: 17, name: "Bhillon", nameHi: "भिल्लोन", regions: [], villages: [] },
   { id: 18, name: "Bhamsara", nameHi: "भामसरा", regions: [], villages: [] },
-  { id: 19, name: "Bichwalia", nameHi: "बिचवालिया", regions: ["Rajasthan", "Haryana"], villages: ["Tulera", "Saidalipur", "Nangal Chaudhary"] },
+  { id: 19, name: "Bichwalia", nameHi: "बिचवालिया", regions: ["Rajasthan", "Haryana"], villages: ["Tulera", "Saidalipur", "Nangal Chaudhary", "Kamaniya"] },
   { id: 20, name: "Bichwal", nameHi: "बिचवाल", regions: [], villages: [] },
   { id: 21, name: "Bidariya", nameHi: "बिदारिया", regions: [], villages: [] },
   { id: 22, name: "Biswar", nameHi: "बिसवार", regions: [], villages: [] },
@@ -212,4 +212,6 @@ export const gotras: Gotra[] = [
   { id: 203, name: "Gwalbansi", nameHi: "ग्वालबंशी", regions: ["UP"], villages: [] },
   { id: 204, name: "Khola", nameHi: "खोला", regions: ["Haryana"], villages: ["Daruali", "Musepur", "Fatehpuri"] },
   { id: 205, name: "Bacchas", nameHi: "बच्छस", regions: ["Haryana", "UP"], villages: [] },
+  { id: 206, name: "Sawlodiya", nameHi: "सावलोडिया", regions: ["Haryana"], villages: ["Mandola"] },
+  { id: 207, name: "Hulda", nameHi: "हुल्दा", regions: ["Haryana"], villages: ["Narnaul", "Nagal Chaudhary", "Maki Tiba", "Khatod Ahir"] },
 ];
