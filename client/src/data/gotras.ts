@@ -194,7 +194,7 @@ export const gotras: Gotra[] = [
   { id: 185, name: "Nuniwal/Nooniwal", nameHi: "नूनीवाल", regions: ["UP", "Haryana"], villages: ["Meerut", "Narnaul", "Dundahera"] },
   { id: 186, name: "Chopra", nameHi: "चोपड़ा", regions: ["UP", "Haryana"], villages: ["Saharanpur", "Yamunanagar"] },
   { id: 187, name: "Rawat", nameHi: "रावत", regions: ["Haryana", "UP", "Rajasthan", "MP"], villages: ["Bharatpur", "Agra", "Etah", "Etawah", "Manipuri", "Auraiya"] },
-  { id: 188, name: "Chabbariya", nameHi: "छब्बरिया", regions: [], villages: [] },
+  { id: 188, name: "Chabbariya", nameHi: "छब्बरिया", regions: ["UP", "Haryana"], villages: [] },
   { id: 189, name: "Kankubja", nameHi: "कन्नौजिया", regions: ["UP"], villages: [] },
   { id: 190, name: "Kosaliya", nameHi: "कोसलिया", regions: ["Haryana"], villages: [] },
   { id: 191, name: "Kheshawa", nameHi: "खेशवा", regions: ["Rajasthan", "Haryana"], villages: ["Kalgaon"] },
@@ -208,4 +208,8 @@ export const gotras: Gotra[] = [
   { id: 199, name: "Dhumre", nameHi: "धुमरे", regions: ["UP"], villages: ["Khanda", "Pilkhan", "Shahpur"] },
   { id: 200, name: "Kadaiya", nameHi: "कडैया", regions: ["Rajasthan"], villages: [] },
   { id: 201, name: "Kadiyan", nameHi: "कादियान", regions: ["Haryana"], villages: [] },
+  { id: 202, name: "Bhidor / Bhiror", nameHi: "भिदोर / भिरोर", regions: ["UP"], villages: ["Agra", "Firozabad"] },
+  { id: 203, name: "Gwalbansi", nameHi: "ग्वालबंशी", regions: ["UP"], villages: [] },
+  { id: 204, name: "Khola", nameHi: "खोला", regions: ["Haryana"], villages: ["Daruali"] },
+  { id: 205, name: "Bacchas", nameHi: "बच्छस", regions: ["Haryana", "UP"], villages: [] },
 ];
