@@ -1,0 +1,70 @@
+Make these 3 fixes across the codebase:
+
+## FIX 1 — ADD INFO FIELD TO GOTRAS
+
+In client/src/data/gotras.ts:
+
+Add info field to the Gotra interface:
+
+export interface Gotra {
+  id: number;
+  name: string;
+  nameHi: string;
+  regions: string[];
+  villages: string[];
+  info: string;
+}
+
+Add this exact default text as info to every single gotra entry without exception:
+"No historical information documented yet for this gotra. If you know the origin or history of this gotra, please share it with us."
+
+Example:
+{ id: 1, name: "Afriya", nameHi: "अफ्रिया", regions: ["Haryana"], villages: ["Tizara", "Rewari"], info: "No historical information documented yet for this gotra. If you know the origin or history of this gotra, please share it with us." },
+
+In GotraDetailPage.tsx add a Historical Notes section after the villages section:
+- Heading: "Historical Notes" in Playfair Display same style as other headings
+- If gotra.info includes "No historical information documented" → show italic, text-muted-foreground
+- If gotra.info is real custom content → show normal foreground color, normal weight, good line height
+- No hyperlinks anywhere in this section
+- Dark mode compatible, mobile responsive
+
+---
+
+## FIX 2 — FIX ABOUT PAGE CONTACT SECTION
+
+In the About page, find the "Email the Editors" section and replace it completely with:
+
+Heading: "Connect With Us"
+
+Text: "For historical submissions, gotra information, corrections, or any community contributions — reach out to us directly on Instagram."
+
+Link:
+- Text: "@the_ahirgarh"
+- href: https://www.instagram.com/the_ahirgarh
+- target: _blank
+- Style: saffron color, bold, with Instagram icon from lucide-react
+- Hover: underline or glow effect
+
+Remove all mention of email anywhere on the About page.
+
+---
+
+## FIX 3 — FIX BENTO GRID ON HOME PAGE
+
+In HomePage.tsx, find the BentoGrid section.
+There is a card linking to /notice-board — remove it completely.
+Replace it with a card linking to /personalities with:
+- Icon: Users from lucide-react
+- Heading: "Personalities"
+- Subtext: "Notable Ahirs and Yadavs who shaped history."
+- Same glass-card styling as the Culture card next to it
+
+---
+
+## CRITICAL:
+- Add info field to every single gotra entry — do not skip any
+- Do not change any other existing gotra fields
+- Do not break any existing functionality
+- Dark mode on all changes
+- Mobile responsive on all changes
+- Only touch: gotras.ts, GotraDetailPage.tsx, AboutPage.tsx, HomePage.tsx

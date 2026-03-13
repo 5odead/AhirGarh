@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { ChevronDown, ArrowRight, BookOpen, Shield, Users, MapPin, History, MessageSquare, Heart } from 'lucide-react';
+import { ChevronDown, ArrowRight, BookOpen, Shield, Users, MapPin, History, Heart } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { articles } from '@/data/articles';
 
@@ -149,12 +149,12 @@ function BentoGrid() {
             </motion.div>
           </Link>
 
-          {/* Notice Board */}
-          <Link href="/notice-board">
+          {/* Personalities */}
+          <Link href="/personalities">
             <motion.div whileHover={{ y: -4, scale: 0.99 }} className="glass-card p-6 h-full flex flex-col justify-center items-center text-center cursor-pointer md:col-span-2">
-              <MessageSquare className="w-8 h-8 text-secondary mb-3" />
-              <h3 className="text-xl font-display font-bold text-foreground">Community Notice Board</h3>
-              <p className="text-sm text-muted-foreground mt-2">Announcements, events, and discussions</p>
+              <Users className="w-8 h-8 text-primary mb-3" />
+              <h3 className="text-xl font-display font-bold text-foreground">Personalities</h3>
+              <p className="text-sm text-muted-foreground mt-2">Notable Ahirs and Yadavs who shaped history.</p>
             </motion.div>
           </Link>
 

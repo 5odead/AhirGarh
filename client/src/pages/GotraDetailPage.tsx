@@ -80,6 +80,14 @@ export default function GotraDetailPage() {
           </div>
         </div>
 
+        {/* Historical Notes */}
+        <div className="glass p-8 rounded-3xl mb-12 border border-border">
+          <h2 className="text-2xl font-display font-bold text-foreground mb-4">Historical Notes</h2>
+          <p className={`leading-relaxed text-base ${gotra.info.includes("No historical information documented") ? "italic text-muted-foreground" : "text-foreground"}`}>
+            {gotra.info}
+          </p>
+        </div>
+
         {/* Related Gotras */}
         {relatedGotras.length > 0 && (
           <div>

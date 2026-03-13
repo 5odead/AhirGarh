@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Mail, ChevronDown } from 'lucide-react';
+import { Instagram, ChevronDown } from 'lucide-react';
 
 export default function AboutPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -23,12 +23,17 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8 mb-16">
+        <div className="grid grid-cols-1 gap-8 mb-16">
           <div className="glass p-8 rounded-3xl text-center">
-            <h3 className="text-2xl font-bold mb-4">Email the Editors</h3>
-            <p className="text-muted-foreground mb-6">For detailed historical submissions, corrections to wiki articles, or partnership inquiries.</p>
-            <a href="mailto:contact@ahirgarh.com" className="inline-flex items-center px-6 py-3 bg-secondary text-white font-bold rounded-xl hover:bg-secondary/90 transition-colors shadow-lg">
-              <Mail className="w-5 h-5 mr-2" /> Email Us
+            <h3 className="text-2xl font-bold mb-4">Connect With Us</h3>
+            <p className="text-muted-foreground mb-6">For historical submissions, gotra information, corrections, or any community contributions — reach out to us directly on Instagram.</p>
+            <a
+              href="https://www.instagram.com/the_ahirgarh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-primary/10 text-primary border border-primary/30 font-bold rounded-xl hover:bg-primary hover:text-white transition-all shadow-lg hover:shadow-primary/25"
+            >
+              <Instagram className="w-5 h-5 mr-2" /> @the_ahirgarh
             </a>
           </div>
         </div>
