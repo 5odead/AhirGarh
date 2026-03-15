@@ -72,5 +72,181 @@ export const articles: Article[] = [
     content: `The All India Yadav Mahasabha, founded in 1924 during the colonial era, stands as one of the oldest and most significant community organizations in India. Its founding was a direct response to the need to unite the scattered Ahir, Goala, Gwala, Rawat, and other sub-communities under a single, powerful Yadav identity. The founding of the Mahasabha was driven by a dual need: first, to counter the social discrimination faced by the community within the caste hierarchy; and second, to leverage political unity for better representation in colonial governance structures. The organization played a significant role in the Mandal Commission debates, advocating strongly for OBC reservations. Today, the All India Yadav Mahasabha has state chapters across every Indian state with significant Yadav populations. It organizes annual conventions, educational scholarships, community welfare programs, and matrimonial services. State-level bodies include the UP Yadav Mahasabha, Bihar Yadav Mahasabha, Haryana Ahir Mahasabha, and the Maharashtra Ahir Samaj. Beyond India, diaspora organizations in the United States, United Kingdom, Canada, and the Gulf countries serve the global Yadav community.`,
     readTime: "5 min", date: "2024-02-20", featured: false,
     image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800"
+  },
+  {
+    id: 11,
+    slug: "ahir-yadav-kingdoms",
+    title: "The Kingdoms of the Ahir and Yadav Dynasties",
+    titleHi: "",
+    category: "History",
+    excerpt: "From the Abhira Traikutakas to the Yadavas of Devgiri — a documentation of every known Ahir and Yadav dynasty that ruled across the Indian subcontinent.",
+    content: `The Ahir and Yadav community has one of the longest and most widespread ruling histories in the Indian subcontinent. Across thousands of years, multiple dynasties emerged from this lineage — ruling kingdoms from Gujarat and Rajasthan in the west to Bihar and Bengal in the east, and from the Deccan plateau to the northern plains.
+
+## Known Dynasties and Kingdoms
+
+**Abhira Traikutakas Dynasty**
+One of the earliest recorded Abhira ruling dynasties, the Traikutakas ruled in western India during the 5th century CE. Their inscriptions have been found in Maharashtra and Gujarat.
+
+**Abhira Kalchuri Dynasty**
+The Kalchuris, also of Abhira lineage, were a powerful ruling clan whose branches controlled large parts of central and western India at various points in history.
+
+**Abhira Gupta Dynasty**
+A branch of the ruling lineage connected to the Gupta era, documenting Abhira political presence during one of India's most celebrated historical periods.
+
+**Abhira Western Kshatrapas**
+The Abhiras are recorded as having political connections with the Western Kshatrapa rulers of Gujarat and Sindh.
+
+**Gopala Dynasty**
+A ruling lineage named after the Gopal tradition — deeply tied to the pastoral and Krishna-connected heritage of the community.
+
+**Mahispala Dynasty**
+A lesser-documented but historically significant dynasty tied to the Yadav lineage.
+
+**Chudasama Dynasty**
+The Chudasamas of Saurashtra (Gujarat) were a prominent Yadav ruling clan who controlled the Junagadh region for centuries. They are one of the most documented Yadav royal families of western India.
+
+**Yadavas of Devgiri**
+The Yadava dynasty of Devgiri (modern Daulatabad, Maharashtra) was the most powerful medieval Yadav kingdom. At their peak in the 12th and 13th centuries, they controlled much of the Deccan. Their capital Devgiri was one of the most fortified cities in India.
+
+**Yaduvanshi Bhoi Dynasty**
+A branch of the Yaduvanshi lineage that established ruling authority in their region.
+
+**Ayar Dynasty**
+The Ayars — a name used for the Ahir community in South India — had their own ruling lineage, particularly in Tamil Nadu and Kerala.
+
+**Allada Dynasty**
+A ruling clan of Yadav lineage documented in the Deccan region.
+
+**Sadgop Dynasty**
+The Sadgops of Bengal are a Yadav-origin community who established zamindari and ruling authority across parts of Bengal.
+
+**Yadav Varman Dynasty**
+A documented Yadav ruling lineage.
+
+**Pradyota Dynasty**
+Connected to the ancient Pradyota lineage, one of the earliest post-Mahabharata ruling families.
+
+**Porus — Shurasena Kingdom**
+King Porus, who famously fought Alexander the Great at the Battle of Hydaspes in 326 BCE, is widely believed to have been of Yaduvanshi/Shurasena lineage. The Shurasenas were a Yadav clan who ruled the Mathura region.
+
+**Abisares Kingdom**
+A kingdom in the northwestern frontier connected to the broader Yadav political landscape of the ancient period.
+
+**Bhadanaka Kingdom**
+A documented kingdom of Yadav lineage in northern India.
+
+**Travancore Kingdom**
+The Travancore royal family of Kerala traces connections to Yadav lineage.
+
+**Mahaban Kingdom**
+Mahaban, located in the Mathura region of Uttar Pradesh, was an ancient seat of Yadav power — deeply tied to the Krishna tradition.
+
+**Yadavas of Simhapur and Bhambhagiri**
+Lesser-documented but historically recorded Yadav ruling presences in their respective regions.
+
+## Conclusion
+
+This list represents only what has been documented so far. The full scope of Ahir and Yadav ruling history across India spans over two thousand years and multiple regions. Ahirgarh is actively working to document each of these dynasties in detail. If you have information about any of these kingdoms or others not listed here, please reach out to us on Instagram at @the_ahirgarh.`,
+    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800",
+    date: "March 2026",
+    readTime: "6 min",
+    featured: true
+  },
+  {
+    id: 12,
+    slug: "ahir-zamindars-bihar",
+    title: "The Ahir Zamindars and Estates of Bihar",
+    titleHi: "",
+    category: "History",
+    excerpt: "Long before modern politics, Ahir and Yadav families controlled vast estates and chieftancies across Bihar — commanding land, armies and influence.",
+    content: `In the feudal landscape of colonial and pre-colonial Bihar, the Ahir and Yadav community held significant power as zamindars, estate holders and chieftains. Their influence extended across land, military affairs and local governance.
+
+## Major Ahir Estates and Chieftancies of Bihar
+
+**Murho Estate**
+One of the most prominent Ahir zamindari estates in Bihar. The estate commanded significant landholding and local authority in its region.
+
+**Ranipatti Estate**
+A notable Ahir estate in Bihar with documented zamindari authority.
+
+**Choudhary Chieftancy**
+Among the most powerful and wealthy of all Ahir chieftancies in Bihar. The Choudhary chieftancy was so influential that their military forces participated in campaigns beyond Bihar — notably supporting Chhatrapati Shivaji Maharaja in battle. The chieftancy also donated multiple villages to Brahmins and is recorded as having destroyed a Buddhist monastery. They were one of the richest ruling Ahir families of their time.
+
+**Khurda Karveli Estate**
+A significant estate of Ahir zamindari. Pappu Yadav, the contemporary politician, is a descendant of this estate and reportedly still holds approximately 9,000 acres of land connected to this lineage.
+
+**Gosaidaspur / Gosaipur Darbar**
+Another documented Ahir estate in Bihar with darbar-level authority.
+
+**Tingana Estate**
+A recorded Ahir jagirdari estate.
+
+**Chandori Jagir**
+Also known as Chandory, this was a notable jagir held by Ahir zamindars.
+
+**Parsadi Raj Estate and Belwargang Estate**
+Further documented Ahir landholding estates in the Bihar region.
+
+**Saligrami Estate and Ranipatti Estate**
+Recorded Ahir zamindari presences in Bihar.
+
+## Military Legacy
+
+The Ahir community of Bihar has maintained a strong military tradition. AK Bharti, who led Operation Sindoor, comes from this lineage — a testament to the continuing military heritage of Bihar's Ahir families.
+
+## Majhrauth Lineage
+
+The Majhrauth gotra — found across UP and Bihar — traces its lineage to King Madhu, the son of Yadu himself. This makes the Majhrauth one of the most ancient and directly traceable gotras to the original Yadav royal lineage.
+
+## Conclusion
+
+The zamindari and estate legacy of Bihar's Ahir community represents centuries of political, military and economic power. Much of this history remains undocumented. Ahirgarh is committed to preserving these records. If your family is connected to any of these estates, please reach out to us on Instagram at @the_ahirgarh.`,
+    image: "https://images.unsplash.com/photo-1599930113854-d6d7fd521f10?w=800",
+    date: "March 2026",
+    readTime: "5 min",
+    featured: false
+  },
+  {
+    id: 13,
+    slug: "dhindhor-ahir-wrestlers",
+    title: "The Wrestling Legacy of the Dhindhor Ahir Clan",
+    titleHi: "",
+    category: "Culture",
+    excerpt: "From railway champions to international title winners — the Dhindhor Ahir clan has produced some of India's most celebrated wrestlers across generations.",
+    content: `Wrestling has been a cornerstone of Ahir culture for centuries. Within the Dhindhor Ahir community, the tradition of kushti runs especially deep — producing champions at the district, national and international level across multiple generations.
+
+## Freedom Fighters of the Dhindhor Clan
+
+Before their sporting legacy, the Dhindhor Ahirs established themselves as warriors in the truest sense.
+
+**Jivaram Ahir** was a prominent Dhindhor Yaduvanshi leader who played a crucial role in the 1857 revolt against the British in Jaunpur, Uttar Pradesh. His resistance against colonial forces made him one of the most significant Ahir figures of the independence struggle.
+
+**Kishun Ahir** fought alongside Jivaram in the 1857 revolt. He was captured by British forces and executed in May 1858 in Jaunpur — giving his life for the freedom of his nation.
+
+## Champions of the Akhada
+
+**Late Lt. Lal Bachan Yadav** was an international wrestling coach and recipient of the Yash Bharti award — one of Uttar Pradesh's highest civilian honours.
+
+**Girja Shankar Yadav** was known as the All India Railway Champion from 1967 to 1971. He was famous for his legendary bouts against Dara Singh, one of the most celebrated wrestlers in Indian history.
+
+**Kedar Yadav (Keshav Pahalwan)** stood at 6 feet 7 inches and competed at the national level, known for his exceptional physique and strength.
+
+**Ram Singh Yadav** from Jaunpur was a notable wrestler and District Panchayat member — combining community service with sporting achievement.
+
+**Ramchandra Yadav Pahalwan** from the Gorakhpur region dominated wrestling for over a decade and held the title of UP Kesari.
+
+**Ramji Yadav Pahalwan** from Varanasi was recognised as an All India Railway Champion and one of the top wrestlers of his era.
+
+**Vinod Kumar Yadav**, son of Ramji Yadav, carried the family legacy forward — winning Banaras Kesari 11 times, Jaunpur Kesari twice and Awadh Kesari once.
+
+**Rishabh Yadav** brought the tradition to the international stage, winning at the Thailand Wrestling Championship in both 2023 and 2024.
+
+## A Living Legacy
+
+From the battlefields of 1857 to the wrestling arenas of Thailand, the Dhindhor Ahir community has consistently produced fighters, champions and leaders. Their story is one of strength, sacrifice and an unbroken connection to their warrior roots.`,
+    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800",
+    date: "March 2026",
+    readTime: "5 min",
+    featured: false
   }
 ];
