@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'wouter';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Share2 } from 'lucide-react';
@@ -56,14 +56,44 @@ export default function ArticlePage() {
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="glass p-8 md:p-12 rounded-3xl -mt-24 relative z-30 shadow-xl">
-          {/* Drop cap for first letter */}
           <ReactMarkdown
-            className="prose prose-invert max-w-none
-              prose-headings:font-display prose-headings:text-foreground
-              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
-              prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
-              prose-strong:text-foreground prose-strong:font-bold
-              prose-li:text-muted-foreground"
+            components={{
+              h2: ({children}) => (
+                <h2 className="font-display text-2xl font-bold text-foreground mt-10 mb-4 pb-2 border-b border-border/40">
+                  {children}
+                </h2>
+              ),
+              h3: ({children}) => (
+                <h3 className="font-display text-xl font-bold text-foreground mt-8 mb-3">
+                  {children}
+                </h3>
+              ),
+              p: ({children}) => (
+                <p className="text-muted-foreground leading-8 mb-6 text-base">
+                  {children}
+                </p>
+              ),
+              strong: ({children}) => (
+                <strong className="text-foreground font-bold">
+                  {children}
+                </strong>
+              ),
+              li: ({children}) => (
+                <li className="text-muted-foreground leading-7 mb-2">
+                  {children}
+                </li>
+              ),
+              ul: ({children}) => (
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {children}
+                </ul>
+              ),
+              ol: ({children}) => (
+                <ol className="list-decimal list-inside mb-6 space-y-1">
+                  {children}
+                </ol>
+              ),
+            }}
           >
             {article.content}
           </ReactMarkdown>
