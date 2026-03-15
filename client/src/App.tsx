@@ -57,8 +57,9 @@ function DynamicTitle() {
 
 function Router() {
   return (
-    <AnimatePresence mode="wait">
+    <>
       <DynamicTitle />
+      <AnimatePresence mode="wait">
       <Switch>
         <Route path="/" component={HomePage}/>
         <Route path="/wiki" component={WikiPage}/>
@@ -75,7 +76,8 @@ function Router() {
         <Route path="/about" component={AboutPage}/>
         <Route component={NotFound} />
       </Switch>
-    </AnimatePresence>
+      </AnimatePresence>
+    </>
   );
 }
 

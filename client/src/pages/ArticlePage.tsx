@@ -3,6 +3,7 @@ import { useParams, Link } from 'wouter';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Share2 } from 'lucide-react';
 import { articles } from '@/data/articles';
+import ReactMarkdown from 'react-markdown';
 
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -56,14 +57,16 @@ export default function ArticlePage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="glass p-8 md:p-12 rounded-3xl -mt-24 relative z-30 shadow-xl">
           {/* Drop cap for first letter */}
-          <div className="prose prose-lg dark:prose-invert max-w-none 
-            prose-p:leading-relaxed prose-p:text-muted-foreground prose-p:font-sans
-            first-letter:text-6xl first-letter:font-display first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-1
-          ">
-            {article.content.split('\n\n').map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
-          </div>
+          <ReactMarkdown
+            className="prose prose-invert max-w-none
+              prose-headings:font-display prose-headings:text-foreground
+              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+              prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4
+              prose-strong:text-foreground prose-strong:font-bold
+              prose-li:text-muted-foreground"
+          >
+            {article.content}
+          </ReactMarkdown>
 
           <div className="mt-12 pt-8 border-t border-border flex justify-between items-center">
              <div className="font-medium text-foreground">Share this article:</div>
