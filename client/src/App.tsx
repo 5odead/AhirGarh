@@ -1,4 +1,5 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -32,9 +33,32 @@ import ReservationsPage from "@/pages/ReservationsPage";
 import AboutPage from "@/pages/AboutPage";
 import NotFound from "@/pages/not-found";
 
+const pageTitles: Record<string, string> = {
+  "/": "Ahirgarh — India's Yadav & Ahir Community Wiki",
+  "/wiki": "Wiki Articles — Ahirgarh",
+  "/gotras": "Gotra List — 200+ Yadav & Ahir Gotras | Ahirgarh",
+  "/villages": "Villages & Places — Yadav Ahir Locations | Ahirgarh",
+  "/personalities": "Famous Personalities — Notable Yadavs & Ahirs | Ahirgarh",
+  "/history": "History — Yadav & Ahir Heritage | Ahirgarh",
+  "/culture": "Culture — Yadav & Ahir Traditions | Ahirgarh",
+  "/reservations": "OBC & Reservations Guide — Yadav Community | Ahirgarh",
+  "/about": "About — Ahirgarh Community Wiki",
+};
+
+function DynamicTitle() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const base = location.split("/").slice(0, 2).join("/") || "/";
+    const title = pageTitles[base] || "Ahirgarh — India's Yadav & Ahir Community Wiki";
+    document.title = title;
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <AnimatePresence mode="wait">
+      <DynamicTitle />
       <Switch>
         <Route path="/" component={HomePage}/>
         <Route path="/wiki" component={WikiPage}/>

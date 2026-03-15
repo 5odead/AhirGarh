@@ -1,0 +1,218 @@
+Add complete SEO optimization to the project. Follow every instruction exactly.
+
+---
+
+## CHANGE 1 — UPDATE client/index.html
+
+Find the <head> section in client/index.html and replace everything inside <head> with this exact content:
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Primary SEO -->
+<title>Ahirgarh — India's Yadav & Ahir Community Wiki</title>
+<meta name="description" content="Ahirgarh is India's first digital wiki for the Yadav and Ahir community. Find your gotra, explore villages, discover personalities and read 3000 years of Ahir history. Free, accurate and community-built." />
+<meta name="keywords" content="Yadav gotra list, Ahir gotra, Yadav history, Ahir history, Yadav community wiki, gotra finder, Ahir community, Yaduvanshi, Yadav vansh, gotra kya hai, mera gotra, Yadav gotra names, Ahirgarh" />
+<meta name="author" content="Ahirgarh" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="https://ahirgarh.vercel.app" />
+<meta name="language" content="English, Hindi" />
+<meta name="revisit-after" content="7 days" />
+<meta name="category" content="Community, History, Culture" />
+
+<!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://ahirgarh.vercel.app" />
+<meta property="og:title" content="Ahirgarh — India's Yadav & Ahir Community Wiki" />
+<meta property="og:description" content="India's first digital wiki for the Yadav and Ahir community. Find your gotra, explore villages, discover personalities and read 3000 years of Ahir history." />
+<meta property="og:image" content="https://ahirgarh.vercel.app/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Ahirgarh" />
+<meta property="og:locale" content="en_IN" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://ahirgarh.vercel.app" />
+<meta name="twitter:title" content="Ahirgarh — India's Yadav & Ahir Community Wiki" />
+<meta name="twitter:description" content="India's first digital wiki for the Yadav and Ahir community. Find your gotra, explore villages, discover personalities and read 3000 years of Ahir history." />
+<meta name="twitter:image" content="https://ahirgarh.vercel.app/og-image.png" />
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Ahirgarh",
+  "alternateName": "अहीरगढ़",
+  "url": "https://ahirgarh.vercel.app",
+  "description": "India's first digital wiki for the Yadav and Ahir community. Documenting gotras, villages, personalities and history.",
+  "inLanguage": ["en-IN", "hi-IN"],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://ahirgarh.vercel.app/gotras?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ahirgarh",
+    "url": "https://ahirgarh.vercel.app",
+    "sameAs": ["https://www.instagram.com/the_ahirgarh"]
+  }
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+---
+
+## CHANGE 2 — CREATE public/robots.txt
+
+Create a new file at public/robots.txt with this exact content:
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://ahirgarh.vercel.app/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+---
+
+## CHANGE 3 — CREATE public/sitemap.xml
+
+Create a new file at public/sitemap.xml with this exact content:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/wiki</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/gotras</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/villages</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/personalities</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/history</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/culture</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/reservations</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ahirgarh.vercel.app/about</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
+
+---
+
+## CHANGE 4 — ADD DYNAMIC PAGE TITLES IN App.tsx OR MAIN ROUTER FILE
+
+Find the main router file where all routes are defined (App.tsx or similar).
+
+Import useEffect and useLocation from wouter or react at the top if not already imported.
+
+Add a component at the top of the file before the router:
+
+const pageTitles: Record<string, string> = {
+  "/": "Ahirgarh — India's Yadav & Ahir Community Wiki",
+  "/wiki": "Wiki Articles — Ahirgarh",
+  "/gotras": "Gotra List — 200+ Yadav & Ahir Gotras | Ahirgarh",
+  "/villages": "Villages & Places — Yadav Ahir Locations | Ahirgarh",
+  "/personalities": "Famous Personalities — Notable Yadavs & Ahirs | Ahirgarh",
+  "/history": "History — Yadav & Ahir Heritage | Ahirgarh",
+  "/culture": "Culture — Yadav & Ahir Traditions | Ahirgarh",
+  "/reservations": "OBC & Reservations Guide — Yadav Community | Ahirgarh",
+  "/about": "About — Ahirgarh Community Wiki",
+};
+
+function DynamicTitle() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const base = location.split("/").slice(0, 2).join("/") || "/";
+    const title = pageTitles[base] || "Ahirgarh — India's Yadav & Ahir Community Wiki";
+    document.title = title;
+  }, [location]);
+  return null;
+}
+
+Then add <DynamicTitle /> as the very first child inside the router, before all Route components.
+
+---
+
+## CHANGE 5 — CREATE public/_redirects
+
+Create a new file at public/_redirects with this exact content:
+
+/* /index.html 200
+
+This ensures all routes return 200 instead of 404 for proper SPA routing on Vercel.
+
+---
+
+## CRITICAL RULES:
+- Do not change any existing page content or components
+- Do not remove the existing favicon link if one exists, just update it
+- Do not break any existing routes or functionality
+- The robots.txt and sitemap.xml must be in the public/ folder so Vercel serves them as static files at the root URL
+- The _redirects file must also be in public/ folder
+- After all changes verify no syntax errors exist in any modified file
+- Only touch: client/index.html, public/robots.txt, public/sitemap.xml, public/_redirects, App.tsx
