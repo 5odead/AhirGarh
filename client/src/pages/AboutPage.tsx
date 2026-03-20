@@ -7,9 +7,9 @@ export default function AboutPage() {
   
   const faqs = [
     { q: "What is Ahirgarh?", a: "Ahirgarh is a community-driven digital encyclopedia and portal dedicated to preserving and sharing the history, culture, and achievements of the Ahir/Yadav community worldwide." },
-    { q: "How can I contribute an article?", a: "You can submit historically accurate, well-researched articles by emailing us or sending a WhatsApp message. Our editorial team reviews all submissions before publishing." },
+    { q: "How can I contribute an article?", a: "You can submit historically accurate, well-researched articles by reaching out to us on Instagram. Our editorial team reviews all submissions before publishing." },
     { q: "Is Ahirgarh affiliated with any political party?", a: "No. Ahirgarh is strictly a cultural, historical, and community heritage platform. We are politically neutral and independent." },
-    { q: "Who built this platform?", a: "Ahirgarh was built by a group of community volunteers and tech professionals who wanted to create a modern digital home for our heritage." }
+    { q: "Who built this platform?", a: "Ahirgarh was created by an individual who prefers to remain anonymous — someone with a deep connection to this heritage and a belief that the work should speak for itself." }
   ];
 
   return (

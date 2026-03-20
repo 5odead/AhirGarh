@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useParams, Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { ArrowLeft, MapPin, Users, Send } from 'lucide-react';
+import { ArrowLeft, MapPin, Users } from 'lucide-react';
 import { villages } from '@/data/villages';
 import { gotras } from '@/data/gotras';
 
@@ -67,8 +67,8 @@ export default function VillageDetailPage() {
                   ) : (
                     <div className="p-6 rounded-2xl bg-muted/30 border border-dashed border-border text-center">
                       <p className="text-muted-foreground mb-4 font-medium">No gotra data linked yet. Help us expand →</p>
-                      <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-primary font-bold hover:underline">
-                        Submit info on WhatsApp <Send className="w-4 h-4 ml-1" />
+                      <a href="/about" className="inline-flex items-center text-primary font-bold hover:underline">
+                        Visit About page to learn how to contact us
                       </a>
                     </div>
                   )}
@@ -94,8 +94,8 @@ export default function VillageDetailPage() {
                 <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6">
                   <h4 className="font-bold text-foreground mb-2">Know more?</h4>
                   <p className="text-sm text-muted-foreground mb-4">Add local info, temples, or traditions.</p>
-                  <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="w-full inline-flex items-center justify-center px-4 py-2 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-all">
-                    WhatsApp <Send className="w-4 h-4 ml-2" />
+                  <a href="/about" className="w-full inline-flex items-center justify-center px-4 py-2 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-all">
+                    Visit About page to contact us
                   </a>
                 </div>
               </div>

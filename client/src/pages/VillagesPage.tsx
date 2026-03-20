@@ -116,7 +116,7 @@ export default function VillagesPage() {
           <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
             <p>
               Village names may vary in spelling across sources and regions. If you cannot find your village, try searching by district name or nearby village. 
-              This database is actively growing. To add a village, <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="text-primary font-bold hover:underline">contact us on WhatsApp</a>.
+              This database is actively growing. To contribute a village, visit our <a href="/about" className="text-primary font-bold hover:underline">About page</a> to learn how to contact us.
             </p>
           </div>
         </div>
