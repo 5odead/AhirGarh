@@ -1,0 +1,170 @@
+Let me verify the village names first.Good. Verified. Here are the corrected village names based on official sources:
+
+**Spelling corrections confirmed:**
+- Jwalahedi → **Jwala Heri** (confirmed Wikipedia/official)
+- Kapashera → **Kapashera** ✅
+- Harjokheri → **Harjokhari** ✅
+- Kangnahedi → **Kanganheri** (official Delhi govt spelling)
+- Kharkhari Rond → **Kharkhari Nahar** ✅
+- Pandwala Kalan → **Pindwala Kalan** (official) but locally known as Pandwala Kalan — keeping as is
+- Kadipur → **Kadipur** ✅ (exists, different from Kapashera)
+- Badli → **Badli** ✅
+- Todapur → **Todapur** ✅
+- Saidulajab → **Saidulajab** ✅
+- Shadipur → **Shadipur** ✅
+- Bhalswa → **Bhalswa** ✅
+- Begumpur → **Begumpur** ✅
+
+Now here's the complete Replit prompt:
+
+```
+Make these exact changes to gotras.ts and villages.ts. Follow every instruction precisely.
+
+---
+
+## CHANGE 1 — UPDATE EXISTING GOTRAS IN gotras.ts
+
+For each gotra below, find it by id and:
+- ADD the region to regions array ONLY if not already present
+- ADD the villages to villages array ONLY if not already present
+- Do NOT remove any existing regions or villages
+
+id: 1 (Afriya) → add "Delhi" to regions, add villages: ["Jafarpur", "Surheda", "Kheda Dabur", "Khaira", "Paprawat", "Kharkhari Jatmal", "Hasanpur", "Pandwala Kalan", "Pandwala Khurd", "Jhuljhuli", "Dariyapur", "Daulatpur", "Kapashera", "Bagdola", "Ghummanhera", "Haidarpur", "Hastsal"]
+id: 19 (Bichwalia) → add "Delhi" to regions, add villages: ["Seedhipura", "Naharpur"]
+id: 35 (Dagar) → add "Delhi" to regions, add villages: ["Pandwala Khurd", "Kanganheri", "Samaypur", "Chandrawal"]
+id: 36 (Dahiya) → add "Delhi" to regions, add villages: ["Madipur"]
+id: 37 (Datarta) → add "Delhi" to regions, add villages: ["Madipur", "Kadipur", "Nangloi Jat", "Hastsal"]
+id: 40 (Deshwaal) → add "Delhi" to regions, add villages: ["Shakurpur", "Libaspur"]
+id: 44 (Dusadh) → add "Delhi" to regions, add villages: ["Chandrawal"]
+id: 47 (Gadhwaal) → add "Delhi" to regions, add villages: ["Saidulajab"]
+id: 49 (Gangania) → add "Delhi" to regions, add villages: ["Bagdola"]
+id: 55 (Gidad) → add "Delhi" to regions, add villages: ["Madipur", "Libaspur"]
+id: 59 (Gothwal) → add "Delhi" to regions, add villages: ["Kharkhari Nahar", "Pandwala Kalan"]
+id: 63 (Gusariya) → add "Delhi" to regions, add villages: ["Dariyapur"]
+id: 66 (Harbala) → add "Delhi" to regions, add villages: ["Todapur"]
+id: 73 (Jhagdoliya) → add "Delhi" to regions, add villages: ["Jhuljhuli", "Kanganheri", "Harjokhari", "Haidarpur"]
+id: 76 (Taatla) → add "Delhi" to regions, add villages: ["Badli"]
+id: 78 (Thakraan) → add "Delhi" to regions, add villages: ["Madipur", "Begumpur"]
+id: 80 (Nigania/Ningania) → add "Delhi" to regions, add villages: ["Samaypur"]
+id: 81 (Nahariya) → add "Delhi" to regions, add villages: ["Nangloi Jat"]
+id: 82 (Nirbaan) → add "Delhi" to regions, add villages: ["Paprawat", "Kharkhari Nahar", "Shakurpur", "Jwala Heri", "Begumpur", "Samaypur", "Badli", "Haidarpur", "Hastsal"]
+id: 83 (Nikum) → add "Delhi" to regions, add villages: ["Naharpur"]
+id: 90 (Bhinda) → add "Delhi" to regions, add villages: ["Madipur", "Naharpur"]
+id: 92 (Rabad) → add "Delhi" to regions, add villages: ["Paprawat", "Todapur"]
+id: 104 (Kakodiya) → add "Delhi" to regions, add villages: ["Badli", "Mundka"]
+id: 119 (Pacheriya) → add "Delhi" to regions, add villages: ["Shakurpur", "Jwala Heri"]
+id: 142 (Jajam) → add "Delhi" to regions, add villages: ["Mehram Nagar"]
+id: 149 (Dahadan) → add "Delhi" to regions, add villages: ["Saidulajab", "Libaspur"]
+id: 164 (Naiwal) → add "Delhi" to regions, add villages: ["Bagdola", "Nangloi Jat", "Nangloi Sayyad"]
+id: 177 (Lamba) → add villages: ["Khaira", "Kapashera", "Madipur", "Jwala Heri", "Begumpur"]
+id: 190 (Kosaliya) → add "Delhi" to regions, add villages: ["Begumpur"]
+id: 204 (Khola) → add "Delhi" to regions, add villages: ["Jhuljhuli", "Kapashera", "Madipur", "Shakurpur", "Jwala Heri", "Hastsal", "Kamruddin Nagar"]
+id: 206 (Sawlodiya) → add "Delhi" to regions, add villages: ["Naharpur"]
+id: 77 (Tondak) → add "Delhi" to regions, add villages: ["Kapashera", "Nangloi Jat"]
+id: 8 (Bakia) → add "Delhi" to regions, add villages: ["Rampura"]
+
+---
+
+## CHANGE 2 — ADD NEW GOTRAS TO gotras.ts
+
+Add these entries at the END of the gotras array before the closing ];
+Start from id 208.
+
+{ id: 208, name: "Khatodia", nameHi: "खटोडिया", regions: ["Delhi"], villages: ["Surheda", "Harjokhari", "Jwala Heri", "Khanpur", "Babana"], info: DEFAULT_INFO },
+{ id: 209, name: "Sunaariya", nameHi: "सुनारिया", regions: ["Delhi"], villages: ["Surheda", "Babana"], info: DEFAULT_INFO },
+{ id: 210, name: "Motalia", nameHi: "मोतालिया", regions: ["Delhi"], villages: ["Daulatpur", "Bagdola", "Babana"], info: DEFAULT_INFO },
+{ id: 211, name: "Kaninwal", nameHi: "कनिनवाल", regions: ["Delhi"], villages: ["Kanganheri", "Seedhipura"], info: DEFAULT_INFO },
+{ id: 212, name: "Nagadia", nameHi: "नागडिया", regions: ["Delhi"], villages: ["Jafarpur"], info: DEFAULT_INFO },
+{ id: 213, name: "Kakas", nameHi: "काकस", regions: ["Delhi"], villages: ["Surheda"], info: DEFAULT_INFO },
+{ id: 214, name: "Sinbhal", nameHi: "सिनभाल", regions: ["Delhi"], villages: ["Surheda"], info: DEFAULT_INFO },
+{ id: 215, name: "Rawadiya", nameHi: "रावडिया", regions: ["Delhi"], villages: ["Harjokhari"], info: DEFAULT_INFO },
+{ id: 216, name: "Wadgar", nameHi: "वडगर", regions: ["Delhi"], villages: ["Bagdola", "Jwala Heri"], info: DEFAULT_INFO },
+{ id: 217, name: "Saharang", nameHi: "सहरंग", regions: ["Delhi"], villages: ["Bagdola"], info: DEFAULT_INFO },
+{ id: 218, name: "Kirra", nameHi: "किर्रा", regions: ["Delhi"], villages: ["Madipur"], info: DEFAULT_INFO },
+{ id: 219, name: "Khoswal", nameHi: "खोसवाल", regions: ["Delhi"], villages: ["Madipur"], info: DEFAULT_INFO },
+{ id: 220, name: "Khatiya", nameHi: "खटिया", regions: ["Delhi"], villages: ["Shakurpur"], info: DEFAULT_INFO },
+{ id: 221, name: "Bhoomi", nameHi: "भूमी", regions: ["Delhi"], villages: ["Naharpur"], info: DEFAULT_INFO },
+{ id: 222, name: "Kat", nameHi: "कट", regions: ["Delhi"], villages: ["Naharpur"], info: DEFAULT_INFO },
+{ id: 223, name: "Dahima", nameHi: "दहिमा", regions: ["Delhi"], villages: ["Begumpur"], info: DEFAULT_INFO },
+{ id: 224, name: "Karaliya", nameHi: "करालिया", regions: ["Delhi"], villages: ["Kadipur"], info: DEFAULT_INFO },
+{ id: 225, name: "Tersiya", nameHi: "तेरसिया", regions: ["Delhi"], villages: ["Shadipur"], info: DEFAULT_INFO },
+{ id: 226, name: "Ghunghla", nameHi: "घूंघला", regions: ["Delhi"], villages: ["Samaypur", "Bhalswa"], info: DEFAULT_INFO },
+{ id: 227, name: "Madia", nameHi: "मडिया", regions: ["Delhi"], villages: ["Bhalswa"], info: DEFAULT_INFO },
+{ id: 228, name: "Murah", nameHi: "मुराह", regions: ["Delhi"], villages: ["Libaspur"], info: DEFAULT_INFO },
+{ id: 229, name: "Multania", nameHi: "मुलतानिया", regions: ["Delhi"], villages: ["Badli"], info: DEFAULT_INFO },
+{ id: 230, name: "Kushak", nameHi: "कुशक", regions: ["Delhi"], villages: ["Haidarpur"], info: DEFAULT_INFO },
+{ id: 231, name: "Saamp", nameHi: "सांप", regions: ["Delhi"], villages: ["Nangloi Sayyad"], info: DEFAULT_INFO },
+{ id: 232, name: "Neenav", nameHi: "नीनव", regions: ["Delhi"], villages: ["Khyala"], info: DEFAULT_INFO },
+{ id: 233, name: "Jhanjhariya", nameHi: "झंझरिया", regions: ["Delhi"], villages: ["Pahari Dhiraj"], info: DEFAULT_INFO },
+{ id: 234, name: "Terkiya", nameHi: "तेरकिया", regions: ["Delhi"], villages: ["Todapur"], info: DEFAULT_INFO },
+{ id: 235, name: "Pairkhiya", nameHi: "पैरखिया", regions: ["Delhi"], villages: ["Seedhipura"], info: DEFAULT_INFO },
+{ id: 236, name: "Manganiya", nameHi: "मंगनिया", regions: ["Delhi"], villages: ["Seedhipura"], info: DEFAULT_INFO },
+{ id: 237, name: "Shivaliya", nameHi: "शिवालिया", regions: ["Delhi"], villages: ["Seedhipura"], info: DEFAULT_INFO },
+{ id: 238, name: "Khosya", nameHi: "खोस्या", regions: ["Delhi"], villages: ["Paprawat", "Shakurpur"], info: DEFAULT_INFO },
+
+---
+
+## CHANGE 3 — ADD NEW VILLAGES TO villages.ts
+
+The current last village id is 101. Add these entries at the END before closing ];
+Start from id 102.
+
+{ id: 102, name: "Jafarpur", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi. One of 31 Yadav villages in Delhi. Primarily Afriya gotra.", notablePeople: [] },
+{ id: 103, name: "Surheda", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with multiple gotras including Afriya, Kakas, Sinbhal, Sunaariya and Khatodia.", notablePeople: [] },
+{ id: 104, name: "Kheda Dabur", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi. Primarily Afriya gotra.", notablePeople: [] },
+{ id: 105, name: "Paprawat", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Nirvan, Afriya, Ravad and Khosya gotras.", notablePeople: [] },
+{ id: 106, name: "Kharkhari Nahar", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Gothwal and Nirvan gotras.", notablePeople: [] },
+{ id: 107, name: "Kharkhari Jatmal", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi. Primarily Afriya gotra.", notablePeople: [] },
+{ id: 108, name: "Hasanpur", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi. Primarily Afriya gotra.", notablePeople: [] },
+{ id: 109, name: "Pandwala Kalan", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Afriya and Gothwal gotras.", notablePeople: [] },
+{ id: 110, name: "Pandwala Khurd", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Afriya and Dagar gotras.", notablePeople: [] },
+{ id: 111, name: "Jhuljhuli", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Afriya, Jhagdoliya and Khola gotras.", notablePeople: [] },
+{ id: 112, name: "Dariyapur", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Afriya and Gusariya gotras.", notablePeople: [] },
+{ id: 113, name: "Daulatpur", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Afriya and Motalia gotras.", notablePeople: [] },
+{ id: 114, name: "Kanganheri", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav village in Delhi with Kaninwal, Jhagdoliya and Dagar gotras.", notablePeople: [] },
+{ id: 115, name: "Kapashera", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Tondak, Afriya, Khola and Lamba gotras.", notablePeople: [] },
+{ id: 116, name: "Harjokhari", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Afriya, Jhagdoliya, Rawadiya and Khatodia gotras.", notablePeople: [] },
+{ id: 117, name: "Seedhipura", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-majority village in Delhi with Pairkhiya, Bichwalia, Kaninwal, Manganiya and Shivaliya gotras.", notablePeople: [] },
+{ id: 118, name: "Bagdola", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav-dominated village in Sector-8 Dwarka, Delhi. Home to Gangania, Wadgar, Motalia, Saharang, Naiwal and Afriya gotras.", notablePeople: [] },
+{ id: 119, name: "Madipur", type: "Village", state: "Delhi", district: "West Delhi", history: "Yadav-majority village in West Delhi near Paschim Vihar. Home to Harad, Datarta, Thakraan, Kirra, Lamba, Khola, Dahiya, Gidad and Khoswal gotras.", notablePeople: [] },
+{ id: 120, name: "Shakurpur", type: "Village", state: "Delhi", district: "West Delhi", history: "Yadav-majority village in Delhi. Village of Chaudhary Brahm Prakash, first Chief Minister of Delhi. Home to Harad, Nirvan, Khosya, Pacheriya, Deshwal, Khatiya and Khola gotras.", notablePeople: [] },
+{ id: 121, name: "Jwala Heri", type: "Village", state: "Delhi", district: "West Delhi", history: "Historic Yadav village in Paschim Vihar, West Delhi. Home to Lamba, Khola, Nirvan, Pacheriya, Khatodia and Wadgar gotras.", notablePeople: [] },
+{ id: 122, name: "Naharpur", type: "Village", state: "Delhi", district: "North West Delhi", history: "Yadav-majority village in Delhi on Outer Ring Road. Home to Bichwalia, Bhinda, Nikum, Bhoomi, Sawlodiya and Kat gotras.", notablePeople: [] },
+{ id: 123, name: "Begumpur", type: "Village", state: "Delhi", district: "North West Delhi", history: "Yadav-majority village in Rohini, Delhi. Home to Thakraan, Dahima, Kosaliya, Nirvan and Lamba gotras.", notablePeople: [] },
+{ id: 124, name: "Ghummanhera", type: "Village", state: "Delhi", district: "South West Delhi", history: "Village in Delhi where Yadavs live alongside other communities. Afriya gotra.", notablePeople: [] },
+{ id: 125, name: "Saidulajab", type: "Village", state: "Delhi", district: "South Delhi", history: "Village in South Delhi with Dahadan and Gadhwaal gotras.", notablePeople: [] },
+{ id: 126, name: "Khanpur", type: "Village", state: "Delhi", district: "South Delhi", history: "Village in Delhi with Khatodia gotra.", notablePeople: [] },
+{ id: 127, name: "Shadipur", type: "Village", state: "Delhi", district: "Central Delhi", history: "Village in Delhi with Tersiya gotra.", notablePeople: [] },
+{ id: 128, name: "Rampura", type: "Village", state: "Delhi", district: "Delhi", history: "Village in Delhi with Bakia gotra.", notablePeople: [] },
+{ id: 129, name: "Chandrawal", type: "Village", state: "Delhi", district: "North Delhi", history: "Village in Delhi with Dagar and Dusadh gotras.", notablePeople: [] },
+{ id: 130, name: "Babana", type: "Village", state: "Delhi", district: "South West Delhi", history: "Village in Delhi with Sunaariya, Khatodia and Motalia gotras.", notablePeople: [] },
+{ id: 131, name: "Mundka", type: "Village", state: "Delhi", district: "West Delhi", history: "Village in Delhi with Kakodiya gotra.", notablePeople: [] },
+{ id: 132, name: "Nangloi Jat", type: "Village", state: "Delhi", district: "West Delhi", history: "Village in Delhi with Datarta, Tondak, Naiwal and Nahariya gotras.", notablePeople: [] },
+{ id: 133, name: "Bhalswa", type: "Village", state: "Delhi", district: "North Delhi", history: "Village near Karnal Bypass, Delhi with Ghunghla and Madia gotras. One of 31 Yadav villages in Delhi.", notablePeople: [] },
+{ id: 134, name: "Libaspur", type: "Village", state: "Delhi", district: "North Delhi", history: "Village on GT Road, Delhi with Dahadan, Deshwal, Gidad and Murah gotras. One of 31 Yadav villages in Delhi.", notablePeople: [] },
+{ id: 135, name: "Samaypur", type: "Village", state: "Delhi", district: "North Delhi", history: "Village on GT Road, Delhi with Nirvan, Nigania, Ghunghla and Dagar gotras. One of 31 Yadav villages in Delhi.", notablePeople: [] },
+{ id: 136, name: "Badli", type: "Village", state: "Delhi", district: "North West Delhi", history: "Yadav village in Delhi with Nirvan, Multania, Taatla and Kakodiya gotras. One of 31 Yadav villages in Delhi.", notablePeople: [] },
+{ id: 137, name: "Haidarpur", type: "Village", state: "Delhi", district: "North West Delhi", history: "Yadav village in Delhi on Outer Ring Road with Nirvan, Jhagdoliya, Afriya and Kushak gotras. One of 31 Yadav villages in Delhi.", notablePeople: [] },
+{ id: 138, name: "Nangloi Sayyad", type: "Village", state: "Delhi", district: "West Delhi", history: "Village in Delhi with Saamp, Naiwal and Harad gotras.", notablePeople: [] },
+{ id: 139, name: "Hastsal", type: "Village", state: "Delhi", district: "West Delhi", history: "Yadav village near Janakpuri, Delhi with Nirvan, Khola, Datarta and Afriya gotras. One of 31 Yadav villages in Delhi.", notablePeople: [] },
+{ id: 140, name: "Khyala", type: "Village", state: "Delhi", district: "West Delhi", history: "Village in Delhi with Neenav gotra.", notablePeople: [] },
+{ id: 141, name: "Kamruddin Nagar", type: "Village", state: "Delhi", district: "West Delhi", history: "Village in Delhi with Khola gotra.", notablePeople: [] },
+{ id: 142, name: "Pahari Dhiraj", type: "Village", state: "Delhi", district: "South Delhi", history: "Village in Delhi with Jhanjhariya gotra.", notablePeople: [] },
+{ id: 143, name: "Todapur", type: "Village", state: "Delhi", district: "North West Delhi", history: "Village in Delhi with Harbala, Terkiya and Ravad gotras.", notablePeople: [] },
+{ id: 144, name: "Mehram Nagar", type: "Village", state: "Delhi", district: "West Delhi", history: "Village in Delhi with Jajam gotra.", notablePeople: [] },
+{ id: 145, name: "Kadipur", type: "Village", state: "Delhi", district: "South West Delhi", history: "Yadav village in Delhi with Datarta and Karaliya gotras.", notablePeople: [] },
+
+---
+
+## CRITICAL RULES:
+- Only ADD to existing arrays — never remove or replace existing data
+- For gotras that already have Delhi in regions — skip, do not add duplicate
+- For villages already present in a gotra's array — skip, do not add duplicate
+- All new gotra entries must use DEFAULT_INFO (the const already defined at top of gotras.ts)
+- All new village entries must have type: "Village"
+- Do not change any other fields on existing entries
+- Only touch gotras.ts and villages.ts
+- After all changes verify no syntax errors in either file
+```
+
+🏰
