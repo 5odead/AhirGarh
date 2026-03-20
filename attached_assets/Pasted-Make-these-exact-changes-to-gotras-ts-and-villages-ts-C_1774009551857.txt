@@ -1,0 +1,86 @@
+Make these exact changes to gotras.ts and villages.ts.
+
+---
+
+## CHANGE 1 — UPDATE EXISTING VILLAGES IN villages.ts
+
+Find these villages by id and update ONLY their history and district fields. Do not touch anything else.
+
+id: 61 (Kherki Daula) — update:
+district: "Gurgaon"
+history: "Ancient Yadav village in Gurgaon, now surrounded by the rapidly expanding city. One of the original Yadav-inhabited villages of the Gurugram region."
+
+id: 62 (Sikanderpur Ghosi) — update:
+district: "Gurgaon"
+history: "Historic Yadav village in Gurgaon with Gangania gotra. The village originally belonged to Ghoshi Muslims. According to community tradition, Yadav families who migrated from Gangana village in Rajasthan asserted their presence and eventually settled here permanently, giving rise to the Gangania gotra name itself."
+
+id: 63 (Dundahera) — update:
+district: "Gurgaon"
+history: "One of four sister villages of Gurgaon founded by Yadav brothers from Nashibpur, Narnaul in the late 1700s. The founders belonged to the Nuniwal gotra. The other three sister villages — Chakkarpur, Sarhaul and Mulehera — were established by the same four brothers. Today Dundahera sits at the heart of Gurgaon's industrial belt."
+
+id: 64 (Shikohpur) — update:
+name: "Shikohpur"
+district: "Manesar, Gurgaon"
+history: "Yadav village in Manesar, Gurgaon. Residents trace their origin to families who migrated from Manesar and established roots here. The village now sits in one of Haryana's most industrially significant corridors."
+
+---
+
+## CHANGE 2 — ADD NEW VILLAGES TO villages.ts
+
+Find the last village id in the file and add these entries at the END of the villages array before the closing ];
+Assign sequential id numbers starting after the current last id in the file.
+
+{ name: "Sarhaul", type: "Village", state: "Haryana", district: "Gurgaon", history: "One of the oldest Yadav villages in Gurgaon, established in the late 1700s by brothers from Nashibpur, Narnaul of Mahendragarh district. The founders belonged to the Nuniwal gotra. Along with Chakkarpur, Dundahera and Mulehera — all founded by the same four brothers — Sarhaul is considered among the founding villages of modern Gurgaon. It is said the development of Gurgaon began from this settlement.", notablePeople: [] },
+{ name: "Garhi Bazidpur", type: "Village", state: "Haryana", district: "Sohna, Gurgaon", history: "Historic Yadav village in Sohna, Gurgaon, home to the Ghumi gotra. The village was established in 1656 by Dada Harji Yadav, who migrated from Khatoj village in Mahendragarh. Today his 15th generation continues to live in the village — a testament to nearly four centuries of unbroken presence in this land.", notablePeople: [] },
+{ name: "Nakhrola", type: "Village", state: "Haryana", district: "Gurgaon", history: "Yadav village in Gurgaon with Shisotiya and Khatodia gotras. Residents trace their origin to families who migrated from Manesar and established roots here.", notablePeople: [] },
+{ name: "Carterpuri", type: "Village", state: "Haryana", district: "Gurgaon", history: "Historic Yadav village in Gurgaon, originally known as Daulatpur Naseerabad. In 1978, United States President Jimmy Carter visited the village during his India tour, and his mother Lillian Carter performed social service work here. To honour this visit the village was renamed Carterpuri — one of the rare Indian villages named after a foreign dignitary.", notablePeople: [] },
+{ name: "Kanhai", type: "Village", state: "Haryana", district: "Gurgaon", history: "Ancient Yadav village in Gurgaon near Sector 29, home to the Dabad/Dabhar gotra. According to local tradition, the village takes its name from Kaniram Ji, an ancestor who arrived from Chand Road and settled here — the name Kanhai believed to be derived from his name over generations.", notablePeople: [] },
+{ name: "Chakkarpur", type: "Village", state: "Haryana", district: "Gurgaon", history: "Historic Yadav village in Gurgaon established in the late 1700s by one of four brothers from Nashibpur, Narnaul of Mahendragarh district — all of the Nuniwal gotra. The other three sister villages founded by the same brothers are Sarhaul, Dundahera and Mulehera. Chakkarpur is notable for three havelis dating to the 1800s which shaped the village's social structure.", notablePeople: [] },
+{ name: "Wazirabad", type: "Village", state: "Haryana", district: "Gurgaon", history: "Yadav village in Gurgaon near Sector 52, home to the Dagar gotra. The village is known for the revered Baba Mohan Ram temple, a significant spiritual site for the surrounding Yadav community.", notablePeople: [] },
+{ name: "Nathupur", type: "Village", state: "Haryana", district: "Gurgaon", history: "Ancient Yadav village in Gurgaon that now finds itself at the edge of the modern city. One side of Nathupur looks out onto DLF Cybercity — one of India's largest commercial hubs — while the other side preserves the original village intact. A striking symbol of old and new Gurgaon coexisting side by side.", notablePeople: [] },
+
+---
+
+## CHANGE 3 — UPDATE EXISTING GOTRAS IN gotras.ts
+
+For each gotra below, find it by id and make the specified changes. Only ADD to existing arrays, never remove or replace anything.
+
+id: 33 (Dabhar) — make ALL of these changes:
+- update name to: "Dabad / Dabhar"
+- update nameHi to: "डाबड / डाभर"
+- add "Delhi" to regions if not already present
+- add "Haryana" to regions if not already present
+- add "Rajasthan" to regions if not already present
+- add these villages if not already present: ["Kanhai", "Changrod", "Badhwana", "Vaineepur", "Lilodhh", "Radoola", "Kishangarh", "Chandravali", "Mirzapur", "Jamavadi", "Dabarwas", "Fatehpura Khurd", "Madha", "Paldhi", "Lahrodha", "Mishri", "Pahladgarh", "Nandgaon", "Patoda", "Gindokhar", "Roopgarh", "Govindpuri", "Prahladpura", "Ateli", "Punsika", "Vijaypur", "Bahror", "Balahedhi", "Chhajiyawas", "Aanavas", "Gulavla", "Khairana", "Dhorka", "Khedi", "Balrod", "Prem Nagar", "Pathredi", "Rewadi"]
+- update info to this exact text: "The Dabad/Dabhar gotra has one of the widest documented distributions among Delhi and NCR Yadav gotras. In Delhi, members of this gotra are settled in Changrod, Badhwana, Haveli Haider Ali and near Ajmeri Gate. In Uttar Pradesh, the gotra is found in Vaineepur village, Bulandshahr district. The Dabariya gotra is considered a branch of this same lineage. In Haryana, villages of this gotra include Lilodhh, Radoola (Khanpur), Chandravali, Ooncha Gaon, Mirzapur, Jamavadi and Ballabhgarh. The gotra also has a widely documented Dabar/Kosali branch spread across Rajasthan — including Dabarwas (Neemrana), Fatehpura Khurd, Madha, Paldhi, Lahrodha, Mishri, Pahladgarh, Nandgaon, Patoda, Gindokhar, Mathura, Roopgarh, Govindpuri, Prahladpura, Ateli, Punsika, Vijaypur, Bahror, Balahedhi, Chhajiyawas, Aanavas, Gulavla, Khairana, Dhorka, Khedi, Balrod, Prem Nagar, Pathredi (Kotputli), Loola Aheer and Rewadi. Source: Community records."
+
+id: 35 (Dagar) → add villages: ["Wazirabad"]
+
+id: 49 (Gangania) → add villages: ["Sikanderpur Ghosi"]
+
+id: 182 (Shisotiya) → add villages: ["Nakhrola"]
+
+id: 185 (Nuniwal/Nooniwal) → add "Haryana" to regions if not already present, add villages: ["Sarhaul", "Chakkarpur", "Dundahera", "Mulehera"]
+
+id: 208 (Khatodia) → add villages: ["Nakhrola"]
+
+---
+
+## CHANGE 4 — ADD NEW GOTRA TO gotras.ts
+
+Find the last gotra id in the file and add this entry at the END of the gotras array before the closing ];
+Assign the next available id number after the current last id.
+
+{ name: "Ghumi", nameHi: "घुमी", regions: ["Haryana"], villages: ["Garhi Bazidpur"], info: DEFAULT_INFO },
+
+---
+
+## CRITICAL RULES:
+- For CHANGE 1 — only update the specified fields, do not touch name, type, state or notablePeople unless explicitly stated
+- For CHANGE 2 — assign sequential id numbers starting after the current last village id in the file
+- For CHANGE 3 — only ADD to existing arrays and update specified fields, never remove or replace existing data
+- For CHANGE 4 — assign the next available id number after the current last gotra id
+- Do not add duplicate regions or villages to any existing entry
+- All new gotra entries must use DEFAULT_INFO const already defined at top of gotras.ts
+- Only touch gotras.ts and villages.ts
+- Verify no syntax errors after all changes
